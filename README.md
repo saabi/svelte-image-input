@@ -1,58 +1,120 @@
-# create-svelte
+# Svelte Image Components
 
-Everything you need to build a Svelte library, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+This repository contains three Svelte components for working with images:
 
-Read more about creating a library [in the docs](https://kit.svelte.dev/docs/packaging).
+1. `ImageInput`: A component that accepts images via drag and drop, clipboard paste, or by clicking a button to open a file dialog. It then allows you to resize and crop the image before creating a `data:` URL. It is a combination of the ImageLoader and ImageEncoder components described below.
+2. `ImageLoader`: A component that allows you to load images via drag and drop, clipboard paste, or by clicking a button to open a file dialog.
+3. `ImageEncoder`: A component for creating `data:` URLs from images in real time. You can also move and resize the image before encoding.
 
-## Creating a project
+## `ImageInput` Component
 
-If you're seeing this, you've probably already done this step. Congrats!
+This Svelte component combines the functionality of the `ImageEncoder` and `ImageLoader` components, providing an all-in-one solution for loading images, resizing, cropping, and creating `data:` URLs.
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+### Behavior
 
-# create a new project in my-app
-npm create svelte@latest my-app
+When an image is not loaded, the component displays the `ImageLoader` component, which allows you to load images via drag and drop, clipboard paste, or by clicking a button to open a file dialog.
+
+Once an image is loaded, the component switches to display the `ImageEncoder` component, which allows you to move and resize the image before encoding it as a `data:` URL. A close button (`X`) appears in the top-right corner, allowing you to clear the image and return to the `ImageLoader` component.
+
+### Usage
+
+```html
+<script>
+	import ImageInput from './ImageInput.svelte';
+</script>
+
+<ImageInput bind:url="{url}" {src} {width} {height} {quality} {realTime} {crossOrigin} {classes} {showCompressedResult} />
 ```
 
-## Developing
+### Props
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+- `src`: The source URL of the image to be displayed in the canvas. Defaults to an empty string.
+- `url`: The source URL of the image to be displayed in the canvas. Defaults to an empty string.
+- `width`: The width of the canvas. Defaults to 256.
+- `height`: The height of the canvas. Defaults to 256.
+- `quality`: The image quality (0-1) for the JPEG output. Defaults to 0.5.
+- `realTime`: Whether to update the data URL in real time. Defaults to false.
+- `crossOrigin`: Whether to allow cross-origin images. Defaults to false.
+- `classes`: A space-separated list of classes to apply to the canvas element.
+- `showCompressedResult`: Whether to show the compressed result. Defaults to false.
 
-```bash
-npm run dev
+### Styles
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+The component comes with a basic style that you can customize or extend to match your application's design. The main element is a container with a fixed size, displaying either the `ImageLoader` or `ImageEncoder` component centered within it. The close button is positioned in the top-right corner when an image is loaded.
+
+## `ImageLoader` Component
+> Paste, drop or load images in Svelte
+
+This Svelte component allows you to load images via drag and drop, clipboard paste, or by clicking a button to open a file dialog. It handles various input methods and dispatches an event with the loaded image's data URL.
+
+### Usage
+
+```html
+<script>
+	import ImageLoader from './ImageLoader.svelte';
+</script>
+
+<ImageLoader on:imageLoaded="{(event) => handleImageLoaded(event)}" />
 ```
 
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
+### Event
 
-## Building
+- `imageLoaded`: Dispatched when an image is loaded. The event detail contains a `dataUrl` property with the loaded image's data URL.
 
-To build your library:
+### Example
 
-```bash
-npm run package
+To use the component, add the `ImageLoader` component to your Svelte app and handle the `imageLoaded` event.
+
+```html
+<script>
+	import ImageLoader from './ImageLoader.svelte';
+
+	function handleImageLoaded(event) {
+		const dataUrl = event.detail.dataUrl;
+		console.log('Image loaded:', dataUrl);
+	}
+</script>
+
+<ImageLoader on:imageLoaded="{handleImageLoaded}" />
 ```
 
-To create a production version of your showcase app:
+### Styles
 
-```bash
-npm run build
+The component comes with a basic style that you can customize or extend to match your application's design. The main element is a drop area with a dashed border, a button for loading an image, and a hidden input field for file selection.
+
+## `ImageEncoder` Component
+>Pan, Zoom, and Compress Images in Svelte
+
+This Svelte component allows you to display an image in a canvas, apply pan and zoom actions to it, and create `data:` URLs from the images in real time. The generated data URL can be used for sending and receiving the image inside JSON AJAX requests and even storing images in database string columns, where an image URL would go, simplifying code logic. It provides a customizable user experience with various configuration options. The component also generates a data URL for the modified image, which can be used to show the compressed result. The original intended use is for a profile picture editor, allowing the user to resize and crop images, finally storing them in a small `data:` URL.
+
+### Usage
+
+```html
+<script>
+	import ImagePanZoom from './ImagePanZoom.svelte';
+</script>
+
+<ImagePanZoom
+	src="{yourImageUrl}"
+	url="{outputUrl}"
+	quality={0.5}
+	width={256}
+	height={256}
+	realTime={false}
+	crossOrigin={false}
+	classes="{yourCustomClass}"
+	showCompressedResult={false}
+/>
 ```
 
-You can preview the production build with `npm run preview`.
+### Props
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
-
-## Publishing
-
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
-
-To publish your library to [npm](https://www.npmjs.com):
-
-```bash
-npm publish
-```
+- `src: string`: The source URL of the image to be displayed in the canvas.
+- `url: string`: The data URL of the modified image. Updated on pan and zoom actions.
+- `quality: number`: The image quality (0-1) for the JPEG output. Defaults to 0.5.
+- `width: number`: The width of the canvas. Defaults to 256.
+- `height: number`: The height of the canvas. Defaults to 256.
+- `realTime: boolean`: Whether to update the data URL in real time. Defaults to false.
+- `crossOrigin: boolean`: Whether to allow cross-origin images. Defaults to false.
+- `classes: string`: A space-separated list of classes to apply to the canvas element.
+- `showCompressedResult: boolean`: Whether to show the compressed result. Defaults to false.
