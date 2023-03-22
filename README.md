@@ -6,6 +6,8 @@ This repository contains three Svelte components for working with images:
 2. `ImageLoader`: A component that allows you to load images via drag and drop, clipboard paste, or by clicking a button to open a file dialog.
 3. `ImageEncoder`: A component for creating `data:` URLs from images in real time. You can also move and resize the image before encoding.
 
+It supercedes the [svelte-image-encoder](https://github.com/saabi/svelte-image-encoder) component, which is now deprecated.
+
 ## `ImageInput` Component
 
 This Svelte component combines the functionality of the `ImageEncoder` and `ImageLoader` components, providing an all-in-one solution for loading images, resizing, cropping, and creating `data:` URLs.
