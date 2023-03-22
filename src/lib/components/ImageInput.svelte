@@ -1,13 +1,13 @@
-<script lang='ts'>
-	import ImageEncoder from "./ImageEncoder.svelte";
-	import ImageLoader from "./ImageLoader.svelte";
+<script lang="ts">
+	import ImageEncoder from './ImageEncoder.svelte';
+	import ImageLoader from './ImageLoader.svelte';
 
 	/** A space-separated list of classes to apply to the canvas element. */
 	export let classes: string;
 	/** Whether to allow cross-origin images. Defaults to false */
 	export let crossOrigin: boolean;
 	/**  The source URL of the image to be displayed in the canvas. */
-	export let src = "";
+	export let src = '';
 	/** The width of the canvas. Defaults to 256 */
 	export let width: number;
 	/** The height of the canvas. Defaults to 256 */
@@ -16,20 +16,20 @@
 	export let quality: number;
 	/** Whether to update the data URL in real time. Defaults to false */
 	export let realTime: boolean;
-	/** The data URL of the modified image. Updated on pan and zoom actions. */
+	/** The data URL of the modified image. Updated on pan and zoom actions. This is an output property, so you must use the `bind:` directive to bind it to a variable.*/
 	export let url: string;
 	/** Whether to show the compressed result. Defaults to false */
 	export let showCompressedResult: boolean;
 
 	const clearImageURL = () => {
-		src = "";
+		src = '';
 	};
 
 	$: width = width || 256;
 	$: height = height || 256;
 </script>
 
-<div class='ImageInput'>
+<div class="ImageInput">
 	{#if src}
 		<ImageEncoder
 			{classes}
@@ -44,7 +44,7 @@
 		/>
 		<button on:click={clearImageURL}>X</button>
 	{:else}
-		<ImageLoader on:imageLoaded={({detail: {dataUrl}}) => src = dataUrl} />
+		<ImageLoader on:imageLoaded={({ detail: { dataUrl } }) => (src = dataUrl)} />
 	{/if}
 </div>
 

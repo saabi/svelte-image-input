@@ -31,7 +31,7 @@ Once an image is loaded, the component switches to display the `ImageEncoder` co
 ### Props
 
 - `src`: The source URL of the image to be displayed in the canvas. Defaults to an empty string.
-- `url`: The source URL of the image to be displayed in the canvas. Defaults to an empty string.
+- `url`: The data URL of the modified image. Updated on pan and zoom actions. This is an output property, so you must use the `bind:` directive to bind it to a variable.
 - `width`: The width of the canvas. Defaults to 256.
 - `height`: The height of the canvas. Defaults to 256.
 - `quality`: The image quality (0-1) for the JPEG output. Defaults to 0.5.
@@ -112,7 +112,7 @@ This Svelte component allows you to display an image in a canvas, apply pan and 
 ### Props
 
 - `src: string`: The source URL of the image to be displayed in the canvas.
-- `url: string`: The data URL of the modified image. Updated on pan and zoom actions.
+- `url: string`: The data URL of the modified image. Updated on pan and zoom actions. This is an output property, so you must use the `bind:` directive to bind it to a variable.
 - `quality: number`: The image quality (0-1) for the JPEG output. Defaults to 0.5.
 - `width: number`: The width of the canvas. Defaults to 256.
 - `height: number`: The height of the canvas. Defaults to 256.

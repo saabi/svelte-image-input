@@ -6,7 +6,7 @@
 
 	/**  The source URL of the image to be displayed in the canvas. */
 	export let src: string;
-	/** The data URL of the modified image. Updated on pan and zoom actions. */
+	/** The data URL of the modified image. Updated on pan and zoom actions. This is an output property, so you must use the `bind:` directive to bind it to a variable.*/
 	export let url: string;
 	/** The image quality (0-1) for the JPEG output. Defaults to 0.5 */
 	export let quality: number;
