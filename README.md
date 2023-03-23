@@ -24,6 +24,10 @@ When an image is not loaded, the component displays the `ImageLoader` component,
 
 Once an image is loaded, the component switches to display the `ImageEncoder` component, which allows you to move and resize the image before encoding it as a `data:` URL. A close button (`X`) appears in the top-right corner, allowing you to clear the image and return to the `ImageLoader` component.
 
+### Demo
+
+[https://saabi.github.io/svelte-image-input/](https://saabi.github.io/svelte-image-input/)
+
 ### Usage
 
 ```html
