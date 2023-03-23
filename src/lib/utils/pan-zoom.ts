@@ -1,5 +1,7 @@
 import detectPointerEvents from 'detect-pointer-events';
 
+import {browser} from '$app/env';
+
 export interface Transform {
 	getMinScale (): number;
 	getScale (): number;
@@ -215,6 +217,5 @@ function withMouse (node: HTMLElement, transform: Transform) {
 	}
 }
 
-const runningInBrowser = typeof window !== 'undefined';
-const usePointerEvents = runningInBrowser && !!detectPointerEvents.maxTouchPoints;
+const usePointerEvents = browser && !!detectPointerEvents.maxTouchPoints;
 export const panHandler = usePointerEvents ? withPointers : withMouse;
