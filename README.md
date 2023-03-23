@@ -8,6 +8,12 @@ This repository contains three Svelte components for working with images:
 
 It supercedes the [svelte-image-encoder](https://github.com/saabi/svelte-image-encoder) component, which is now deprecated.
 
+### Installation
+
+```bash
+npm install svelte-image-input
+```
+
 ## `ImageInput` Component
 
 This Svelte component combines the functionality of the `ImageEncoder` and `ImageLoader` components, providing an all-in-one solution for loading images, resizing, cropping, and creating `data:` URLs.
@@ -22,10 +28,22 @@ Once an image is loaded, the component switches to display the `ImageEncoder` co
 
 ```html
 <script>
-	import ImageInput from './ImageInput.svelte';
+	import {ImageInput} from 'svelte-image-input';
+
+	let url = '';
 </script>
 
-<ImageInput bind:url="{url}" {src} {width} {height} {quality} {realTime} {crossOrigin} {classes} {showCompressedResult} />
+<ImageInput
+	bind:url
+	{src}
+	{width}
+	{height}
+	{quality}
+	{realTime}
+	{crossOrigin}
+	{classes}
+	{showCompressedResult}
+/>
 ```
 
 ### Props
@@ -51,25 +69,11 @@ This Svelte component allows you to load images via drag and drop, clipboard pas
 
 ### Usage
 
-```html
-<script>
-	import ImageLoader from './ImageLoader.svelte';
-</script>
-
-<ImageLoader on:imageLoaded="{(event) => handleImageLoaded(event)}" />
-```
-
-### Event
-
-- `imageLoaded`: Dispatched when an image is loaded. The event detail contains a `dataUrl` property with the loaded image's data URL.
-
-### Example
-
 To use the component, add the `ImageLoader` component to your Svelte app and handle the `imageLoaded` event.
 
 ```html
 <script>
-	import ImageLoader from './ImageLoader.svelte';
+	import {ImageLoader} from 'svelte-image-input';
 
 	function handleImageLoaded(event) {
 		const dataUrl = event.detail.dataUrl;
@@ -77,12 +81,12 @@ To use the component, add the `ImageLoader` component to your Svelte app and han
 	}
 </script>
 
-<ImageLoader on:imageLoaded="{handleImageLoaded}" />
+<ImageLoader on:imageLoaded={handleImageLoaded} />
 ```
 
-### Styles
+### Event
 
-The component comes with a basic style that you can customize or extend to match your application's design. The main element is a drop area with a dashed border, a button for loading an image, and a hidden input field for file selection.
+- `imageLoaded`: Dispatched when an image is loaded. The event detail contains a `dataUrl` property with the loaded image's data URL.
 
 ## `ImageEncoder` Component
 >Pan, Zoom, and Compress Images in Svelte
@@ -93,10 +97,10 @@ This Svelte component allows you to display an image in a canvas, apply pan and 
 
 ```html
 <script>
-	import ImagePanZoom from './ImagePanZoom.svelte';
+	import {ImageEncoder} from 'svelte-image-input';
 </script>
 
-<ImagePanZoom
+<ImageEncoder
 	src="{yourImageUrl}"
 	url="{outputUrl}"
 	quality={0.5}

@@ -77,7 +77,7 @@
 	on:dragenter={preventDefault}
 	on:dragleave={preventDefault}
 >
-	Drop, press Ctrl+V, or
+	Drop, paste, or
 	<button on:click={handleButtonClick}>load an image</button>
 </div>
 <input
@@ -90,8 +90,8 @@
 
 <style>
 	.drop-area {
+		box-sizing: border-box;
 		display: inline-block;
-		padding: 10px;
 		border: 2px dashed #ccc;
 		background-color: #f9f9f9;
 		width: 100%;

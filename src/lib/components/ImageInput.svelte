@@ -3,30 +3,31 @@
 	import ImageLoader from './ImageLoader.svelte';
 
 	/** A space-separated list of classes to apply to the canvas element. */
-	export let classes: string;
+	export let classes = '';
 	/** Whether to allow cross-origin images. Defaults to false */
-	export let crossOrigin: boolean;
+	export let crossOrigin = false;
 	/**  The source URL of the image to be displayed in the canvas. */
 	export let src = '';
 	/** The width of the canvas. Defaults to 256 */
-	export let width: number;
+	export let width = 256;
 	/** The height of the canvas. Defaults to 256 */
-	export let height: number;
+	export let height = 256;
 	/** The image quality (0-1) for the JPEG output. Defaults to 0.5 */
-	export let quality: number;
+	export let quality = 0.5;
 	/** Whether to update the data URL in real time. Defaults to false */
-	export let realTime: boolean;
+	export let realTime = false;
 	/** The data URL of the modified image. Updated on pan and zoom actions. This is an output property, so you must use the `bind:` directive to bind it to a variable.*/
-	export let url: string;
+	export let url = '';
 	/** Whether to show the compressed result. Defaults to false */
-	export let showCompressedResult: boolean;
+	export let showCompressedResult = false;
 
 	const clearImageURL = () => {
 		src = '';
+		url='';
 	};
 
-	$: width = width || 256;
-	$: height = height || 256;
+	$: width = width ?? 256;
+	$: height = height ?? 256;
 </script>
 
 <div class="ImageInput">
@@ -50,8 +51,9 @@
 
 <style>
 	.ImageInput {
-		width: 256px;
-		height: 256px;
+		box-sizing: content-box;
+		width: 100%;
+		height: 100%;
 		display: grid;
 		align-items: center;
 		justify-items: center;
