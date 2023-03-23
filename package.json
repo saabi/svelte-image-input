@@ -5,6 +5,7 @@
     "devDependencies": {
         "@playwright/test": "^1.28.1",
         "@sveltejs/adapter-auto": "^2.0.0",
+        "@sveltejs/adapter-static": "^2.0.1",
         "@sveltejs/kit": "^1.5.0",
         "@sveltejs/package": "^2.0.0",
         "@typescript-eslint/eslint-plugin": "^5.45.0",
@@ -12,6 +13,7 @@
         "eslint": "^8.28.0",
         "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-svelte3": "^4.0.0",
+        "gh-pages": "^5.0.0",
         "prettier": "^2.8.0",
         "prettier-plugin-svelte": "^2.8.1",
         "publint": "^0.1.9",
@@ -39,6 +41,7 @@
         "build": "vite build && npm run package",
         "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
         "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+        "deploy": "touch build/.nojekyll && gh-pages -d build -t true",
         "dev": "vite dev",
         "format": "prettier --plugin-search-dir . --write .",
         "lint": "prettier --plugin-search-dir . --check . && eslint .",
