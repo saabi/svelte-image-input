@@ -5,41 +5,45 @@
 		<link rel="icon" href="./favicon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta http-equiv="content-security-policy" content="">
-		<link href="./_app/immutable/assets/_page.f10f00a9.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.de166d67.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index.8d7b790b.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.b88d1559.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.7d4b4875.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/layout.svelte.5bbdb7c5.js">
+		<link href="./_app/immutable/assets/_page.41057f05.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.29187e74.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.529947ac.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.ceba697b.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.547df5b2.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/layout.svelte.b0621dbd.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/_layout.js.984db11e.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout.da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/_page.svelte.9877121c.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/_page.svelte.0f5da6bc.js">
 	</head>
 	<body>
 		<div>
 
 
-<div class="container svelte-abcas6"><h1 class="svelte-abcas6">Svelte Image Input and Manipulation Components</h1>
+<div class="container svelte-1gtduqc"><h1 class="svelte-1gtduqc">Svelte Image Input and Manipulation Components</h1>
 
-	<h2 class="svelte-abcas6">ImageInput Example</h2>
+	<h2 class="svelte-1gtduqc">ImageInput Example</h2>
 
-	<p class="svelte-abcas6">Load an image using drag and drop, clipboard paste, or by clicking the
+	<p class="svelte-1gtduqc">Load an image using drag and drop, clipboard paste, or by clicking the
 		&quot;Load an image&quot; button. Then, resize and crop the image. Click
 		&quot;Save Image&quot; to display the data URL.
 	</p>
 
-	<div class="demo svelte-abcas6"><div class="input"><h3 class="svelte-abcas6">Input Image</h3>
-			<div class="imagebox svelte-abcas6"><div class="ImageInput svelte-8cxrdt" style="--image-input-width: 256px; --image-input-height: 256px">
+	<label><span>Quality (90%): </span>
+		<input type="range" min="0.1" max="1" step="0.1" value="0.9"></label>
+
+	<div class="demo svelte-1gtduqc"><div class="input"><h3 class="svelte-1gtduqc">Input Image</h3>
+			<div class="imagebox svelte-1gtduqc"><div class="ImageInput svelte-8cxrdt" style="--image-input-width: 256px; --image-input-height: 256px">
 
 <div class="drop-area svelte-10x39c5">Drop, paste, or
 	<button class="svelte-10x39c5">load an image</button></div>
 <input type="file" accept="image/*" class="hidden svelte-10x39c5">
 </div></div></div>
 		
-		<div class="output"><h3 class="svelte-abcas6">Output Image</h3>
-			<div class="imagebox svelte-abcas6"></div></div></div>
+		<div class="output"><h3 class="svelte-1gtduqc">Output Image</h3>
+			<div class="imagebox svelte-1gtduqc"></div>
+			</div></div>
 
-	<p class="svelte-abcas6">Check out the code on <a href="https://github.com/saabi/svelte-image-input" target="_blank" rel="noopener noreferrer" class="svelte-abcas6">GitHub</a>.
+	<p class="svelte-1gtduqc">Check out the code on <a href="https://github.com/saabi/svelte-image-input" target="_blank" rel="noopener noreferrer" class="svelte-1gtduqc">GitHub</a>.
 	</p>
 </div>
 
@@ -47,7 +51,7 @@
 			
 			<script>
 				{
-					__sveltekit_a43vpy = {
+					__sveltekit_oybryo = {
 						env: {},
 						base: new URL(".", location).pathname.slice(0, -1),
 						element: document.currentScript.parentElement
@@ -56,10 +60,10 @@
 					const data = [null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.de166d67.js"),
-						import("./_app/immutable/entry/app.7d4b4875.js")
+						import("./_app/immutable/entry/start.29187e74.js"),
+						import("./_app/immutable/entry/app.547df5b2.js")
 					]).then(([kit, app]) => {
-						kit.start(app, __sveltekit_a43vpy.element, {
+						kit.start(app, __sveltekit_oybryo.element, {
 							node_ids: [0, 2],
 							data,
 							form: null,
