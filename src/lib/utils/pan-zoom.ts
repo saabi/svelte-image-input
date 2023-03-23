@@ -1,6 +1,6 @@
 import detectPointerEvents from 'detect-pointer-events';
 
-import {browser} from '$app/env';
+import {browser} from '$app/environment';
 
 export interface Transform {
 	getMinScale (): number;
