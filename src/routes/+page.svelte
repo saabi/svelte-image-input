@@ -2,6 +2,7 @@
 	import ImageInput from '$lib/components/ImageInput.svelte';
 
 	let url = '';
+	let quality = 0.9;
 </script>
 
 <div class="container">
@@ -11,15 +12,27 @@
 
 	<p>
 		Load an image using drag and drop, clipboard paste, or by clicking the
-		"Load an image" button. Then, resize and crop the image. Click
-		"Save Image" to display the data URL.
+		"Load an image" button. Then, resize and crop the image. The output
+		image will be displayed beside along with the final size in bytes of the
+		data URL.
 	</p>
+
+	<label>
+		<span>Quality ({Math.round(quality * 100)}%): </span>
+		<input
+			type="range"
+			min="0.1"
+			max="1"
+			step="0.1"
+			bind:value={quality}
+		/>
+	</label>
 
 	<div class='demo'>
 		<div class='input'>
 			<h3>Input Image</h3>
 			<div class='imagebox'>
-				<ImageInput bind:url />
+				<ImageInput bind:url {quality} />
 			</div>
 		</div>
 		
@@ -29,7 +42,10 @@
 				{#if url}
 					<img src={url} alt='sample output' />
 				{/if}
-			</div>		
+			</div>
+			{#if url}
+				<p>data url size: {url.length} bytes</p>
+			{/if}
 		</div>
 	</div>
 
@@ -84,10 +100,6 @@
 		box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.75);
 		border-radius: 4px;
 		overflow: hidden;
-	}
-	pre {
-		width: 100%;
-		overflow: auto;
 	}
 	a {
 		color: var(--link-color);
