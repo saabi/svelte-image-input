@@ -1,4 +1,4 @@
-# Svelte Image Components
+# Svelte Image Components [demo](https://saabi.github.io/svelte-image-input/)
 
 This repository contains three Svelte components for working with images:
 
@@ -23,10 +23,6 @@ This Svelte component combines the functionality of the `ImageEncoder` and `Imag
 When an image is not loaded, the component displays the `ImageLoader` component, which allows you to load images via drag and drop, clipboard paste, or by clicking a button to open a file dialog.
 
 Once an image is loaded, the component switches to display the `ImageEncoder` component, which allows you to move and resize the image before encoding it as a `data:` URL. A close button (`X`) appears in the top-right corner, allowing you to clear the image and return to the `ImageLoader` component.
-
-### Demo
-
-[https://saabi.github.io/svelte-image-input/](https://saabi.github.io/svelte-image-input/)
 
 ### Usage
 
@@ -61,10 +57,6 @@ Once an image is loaded, the component switches to display the `ImageEncoder` co
 - `crossOrigin`: Whether to allow cross-origin images. Defaults to false.
 - `classes`: A space-separated list of classes to apply to the canvas element.
 - `showCompressedResult`: Whether to show the compressed result. Defaults to false.
-
-### Styles
-
-The component comes with a basic style that you can customize or extend to match your application's design. The main element is a container with a fixed size, displaying either the `ImageLoader` or `ImageEncoder` component centered within it. The close button is positioned in the top-right corner when an image is loaded.
 
 ## `ImageLoader` Component
 > Paste, drop or load images in Svelte
