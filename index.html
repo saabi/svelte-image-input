@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="./svelte-image-input/favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta http-equiv="content-security-policy" content="">
+		<link href="./svelte-image-input/_app/immutable/assets/_page.e96124ae.css" rel="stylesheet">
+		<link rel="modulepreload" href="./svelte-image-input/_app/immutable/entry/start.7a25ae32.js">
+		<link rel="modulepreload" href="./svelte-image-input/_app/immutable/chunks/index.8d7b790b.js">
+		<link rel="modulepreload" href="./svelte-image-input/_app/immutable/chunks/singletons.27fd4d36.js">
+		<link rel="modulepreload" href="./svelte-image-input/_app/immutable/entry/app.41cf945e.js">
+		<link rel="modulepreload" href="./svelte-image-input/_app/immutable/entry/layout.svelte.5bbdb7c5.js">
+		<link rel="modulepreload" href="./svelte-image-input/_app/immutable/entry/_layout.js.984db11e.js">
+		<link rel="modulepreload" href="./svelte-image-input/_app/immutable/chunks/_layout.da46b06b.js">
+		<link rel="modulepreload" href="./svelte-image-input/_app/immutable/entry/_page.svelte.c204278d.js">
+	</head>
+	<body>
+		<div>
+
+
+<div class="container svelte-abcas6"><h1 class="svelte-abcas6">Svelte Image Input and Manipulation Components</h1>
+
+	<h2 class="svelte-abcas6">ImageInput Example</h2>
+
+	<p class="svelte-abcas6">Load an image using drag and drop, clipboard paste, or by clicking the
+		&quot;Load an image&quot; button. Then, resize and crop the image. Click
+		&quot;Save Image&quot; to display the data URL.
+	</p>
+
+	<div class="demo svelte-abcas6"><div class="input"><h3 class="svelte-abcas6">Input Image</h3>
+			<div class="imagebox svelte-abcas6"><div class="ImageInput svelte-i64jne">
+
+<div class="drop-area svelte-10x39c5">Drop, paste, or
+	<button class="svelte-10x39c5">load an image</button></div>
+<input type="file" accept="image/*" class="hidden svelte-10x39c5">
+</div></div></div>
+		
+		<div class="output"><h3 class="svelte-abcas6">Output Image</h3>
+			<div class="imagebox svelte-abcas6"></div></div></div>
+
+	<p class="svelte-abcas6">Check out the code on <a href="https://github.com/saabi/svelte-image-input" target="_blank" rel="noopener noreferrer" class="svelte-abcas6">GitHub</a>.
+	</p>
+</div>
+
+
+			
+			<script>
+				{
+					__sveltekit_nhu21h = {
+						env: {},
+						assets: "/svelte-image-input",
+						base: new URL("./svelte-image-input", location).pathname,
+						element: document.currentScript.parentElement
+					};
+
+					const data = [null,null];
+
+					Promise.all([
+						import("./svelte-image-input/_app/immutable/entry/start.7a25ae32.js"),
+						import("./svelte-image-input/_app/immutable/entry/app.41cf945e.js")
+					]).then(([kit, app]) => {
+						kit.start(app, __sveltekit_nhu21h.element, {
+							node_ids: [0, 2],
+							data,
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+	</body>
+</html>
