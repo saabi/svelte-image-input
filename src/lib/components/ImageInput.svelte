@@ -25,12 +25,12 @@
 		src = '';
 		url='';
 	};
-
+	
 	$: width = width ?? 256;
 	$: height = height ?? 256;
 </script>
 
-<div class="ImageInput">
+<div class="ImageInput" style='--image-input-width: {width}px; --image-input-height: {height}px'>
 	{#if src}
 		<ImageEncoder
 			{classes}
@@ -52,8 +52,8 @@
 <style>
 	.ImageInput {
 		box-sizing: content-box;
-		width: 100%;
-		height: 100%;
+		width: var(--image-input-width);
+		height: var(--image-input-height);
 		display: grid;
 		align-items: center;
 		justify-items: center;

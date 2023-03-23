@@ -1,3 +1,3 @@
-export {default as ImgEncoder} from "./components/ImageEncoder.svelte";
-export {default as ImgLoader} from "./components/ImageLoader.svelte";
-export {default as ImgInput} from "./components/ImageInput.svelte";
+export { default as ImageEncoder } from "./components/ImageEncoder.svelte";
+export { default as ImageLoader } from "./components/ImageLoader.svelte";
+export { default as ImageInput } from "./components/ImageInput.svelte";

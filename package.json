@@ -1,5 +1,9 @@
 {
-    "author": "Sebastian Ferreyra Pons",
+    "author": {
+        "name": "Sebastian Ferreyra Pons",
+        "email": "ushiferreyra@gmail.com",
+        "url": "https://github.com/saabi"
+    },
     "dependencies": {
         "detect-pointer-events": "^1.0.2"
     },
@@ -55,5 +59,5 @@
     "svelte": "./dist/index.js",
     "type": "module",
     "types": "./dist/index.d.ts",
-    "version": "0.1.2"
+    "version": "0.1.3"
 }
