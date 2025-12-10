@@ -3,12 +3,20 @@
 	interface Props {
 		/** Callback function called when an image is loaded. Receives the data URL as a string. */
 		onImageLoaded?: (dataUrl: string) => void;
+		/** Text displayed before the button. Default: "Drop, paste, or" */
+		prefixText?: string;
+		/** Text displayed on the load button. Default: "load an image" */
+		buttonText?: string;
 	}
 </script>
 
 <script lang="ts">
 	// ===== PROPS =====
-	let { onImageLoaded }: Props = $props();
+	let {
+		onImageLoaded,
+		prefixText = 'Drop, paste, or',
+		buttonText = 'load an image'
+	}: Props = $props();
 
 	// ===== REFS =====
 	let fileInput: HTMLInputElement = $state();
@@ -87,8 +95,8 @@
 	ondragenter={preventDefault}
 	ondragleave={preventDefault}
 >
-	Drop, paste, or
-	<button onclick={handleButtonClick}>load an image</button>
+	{prefixText}
+	<button onclick={handleButtonClick}>{buttonText}</button>
 </div>
 <input
 	type="file"

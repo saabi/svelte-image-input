@@ -57,32 +57,37 @@ Once an image is loaded, the component switches to display the `ImageEncoder` co
 - `crossOrigin`: Whether to allow cross-origin images. Defaults to false.
 - `classes`: A space-separated list of classes to apply to the canvas element.
 - `showCompressedResult`: Whether to show the compressed result. Defaults to false.
+- `prefixText`: Text displayed before the button in ImageLoader (default: `"Drop, paste, or"`). See [i18n documentation](docs/i18n.md).
+- `buttonText`: Text displayed on the load button in ImageLoader (default: `"load an image"`). See [i18n documentation](docs/i18n.md).
+- `pasteScope`: Control paste event scope - `'window'` (default) or `'component'`. See [paste scope documentation](docs/paste-scope.md).
 
 ## `ImageLoader` Component
 > Paste, drop or load images in Svelte
 
-This Svelte component allows you to load images via drag and drop, clipboard paste, or by clicking a button to open a file dialog. It handles various input methods and dispatches an event with the loaded image's data URL.
+This Svelte component allows you to load images via drag and drop, clipboard paste, or by clicking a button to open a file dialog. It handles various input methods and calls a callback with the loaded image's data URL.
 
 ### Usage
 
-To use the component, add the `ImageLoader` component to your Svelte app and handle the `imageLoaded` event.
+To use the component, add the `ImageLoader` component to your Svelte app and provide the `onImageLoaded` callback.
 
 ```html
 <script>
 	import {ImageLoader} from 'svelte-image-input';
 
-	function handleImageLoaded(event) {
-		const dataUrl = event.detail.dataUrl;
+	function handleImageLoaded(dataUrl) {
 		console.log('Image loaded:', dataUrl);
 	}
 </script>
 
-<ImageLoader on:imageLoaded={handleImageLoaded} />
+<ImageLoader onImageLoaded={handleImageLoaded} />
 ```
 
-### Event
+### Props
 
-- `imageLoaded`: Dispatched when an image is loaded. The event detail contains a `dataUrl` property with the loaded image's data URL.
+- `onImageLoaded`: Callback function called when an image is loaded. Receives the data URL as a string.
+- `prefixText`: Text displayed before the button (default: `"Drop, paste, or"`). See [i18n documentation](docs/i18n.md).
+- `buttonText`: Text displayed on the load button (default: `"load an image"`). See [i18n documentation](docs/i18n.md).
+- `pasteScope`: Control paste event scope - `'window'` (default) or `'component'`. See [paste scope documentation](docs/paste-scope.md).
 
 ## `ImageEncoder` Component
 >Pan, Zoom, and Compress Images in Svelte
@@ -120,3 +125,11 @@ This Svelte component allows you to display an image in a canvas, apply pan and 
 - `crossOrigin: boolean`: Whether to allow cross-origin images. Defaults to false.
 - `classes: string`: A space-separated list of classes to apply to the canvas element.
 - `showCompressedResult: boolean`: Whether to show the compressed result. Defaults to false.
+
+## Documentation
+
+For advanced usage and customization options, see the following documentation:
+
+- **[Theming Guide](docs/theming.md)** - Customize component appearance with CSS variables
+- **[Internationalization (i18n)](docs/i18n.md)** - Support multiple languages and customize text
+- **[Paste Event Scope](docs/paste-scope.md)** - Control how paste events are handled
