@@ -92,7 +92,7 @@ function withPointers (node: HTMLElement, transform: Transform) {
 	function startDrag (e: PointerEvent) {
 		node.setPointerCapture(e.pointerId);
 		if (!transform.getDragging()) {
-			node.addEventListener(detectPointerEvents.prefix('pointermove'), drag, true);
+			node.addEventListener(detectPointerEvents.prefix('pointermove') as keyof HTMLElementEventMap, drag as EventListener, true);
 			transform.setDragging(true);
 		}
 
@@ -141,19 +141,19 @@ function withPointers (node: HTMLElement, transform: Transform) {
 		node.releasePointerCapture(e.pointerId);
 		if (pointers.length === 0) {
 			transform.setDragging(false);
-			node.removeEventListener(detectPointerEvents.prefix('pointermove'), drag, true);
+			node.removeEventListener(detectPointerEvents.prefix('pointermove') as keyof HTMLElementEventMap, drag as EventListener, true);
 			scaleOrigin = null;
 		}
 	}
 
-	node.addEventListener(detectPointerEvents.prefix('pointerdown'), startDrag, true);
-	node.addEventListener(detectPointerEvents.prefix('pointerup'), stopDrag, true);
+	node.addEventListener(detectPointerEvents.prefix('pointerdown') as keyof HTMLElementEventMap, startDrag as EventListener, true);
+	node.addEventListener(detectPointerEvents.prefix('pointerup') as keyof HTMLElementEventMap, stopDrag as EventListener, true);
 	node.addEventListener('wheel', rescaleWithWheel, true);
 
 	return {
 		destroy: () => {
-			node.removeEventListener(detectPointerEvents.prefix('pointerdown'), startDrag, true);
-			node.removeEventListener(detectPointerEvents.prefix('pointerup'), stopDrag, true);
+			node.removeEventListener(detectPointerEvents.prefix('pointerdown') as keyof HTMLElementEventMap, startDrag as EventListener, true);
+			node.removeEventListener(detectPointerEvents.prefix('pointerup') as keyof HTMLElementEventMap, stopDrag as EventListener, true);
 			node.removeEventListener('wheel', rescaleWithWheel, true);
 		}
 	}

@@ -27,8 +27,8 @@
 	}: Props = $props();
 
 	// ===== REFS =====
-	let fileInput: HTMLInputElement = $state();
-	let dropAreaElement: HTMLDivElement = $state();
+	let fileInput: HTMLInputElement | undefined = $state();
+	let dropAreaElement: HTMLDivElement | undefined = $state();
 
 	// ===== FUNCTIONS =====
 	const preventDefault = (event: Event) => {
@@ -102,12 +102,13 @@
 	};
 
 	const handleButtonClick = () => {
-		fileInput.click();
+		fileInput?.click();
 	};
 </script>
 
 <svelte:window onpaste={pasteScope === 'window' ? handlePaste : undefined} />
 
+<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
 <div
 	bind:this={dropAreaElement}
 	class="drop-area"
