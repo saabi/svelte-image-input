@@ -87,8 +87,8 @@
 	let offsetX = $state(0);
 	let offsetY = $state(0);
 	let scale = $state(1);
-	let minScale = 1;
-	let dragging = false;
+	let minScale = $state(1);
+	let dragging = $state(false);
 
 	// not a POJO because getters/setters are instrumentable by Svelte
 	// and `transform` is updated by imported functions
@@ -142,14 +142,24 @@
 		if (realTime || !dragging) url = canvas.toDataURL('image/jpeg', quality);
 	}
 
-	run(() => {
-		img && (img.crossOrigin = crossOrigin ? 'anonymous' : null);
+	$effect(() => {
+		if (img) {
+			img.crossOrigin = crossOrigin ? 'anonymous' : null;
+		}
 	});
-	run(() => {
-		img && (img.src = src);
+	$effect(() => {
+		if (img) {
+			img.src = src;
+		}
 	});
-	run(() => {
-		quality, width, height, offsetX, offsetY, scale, redraw();
+	$effect(() => {
+		quality;
+		width;
+		height;
+		offsetX;
+		offsetY;
+		scale;
+		redraw();
 	});
 
 	onMount(() => {

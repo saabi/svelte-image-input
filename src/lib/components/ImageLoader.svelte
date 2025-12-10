@@ -1,7 +1,11 @@
 <script lang='ts'>
-	import { createEventDispatcher } from "svelte";
+	interface Props {
+		/** Callback function called when an image is loaded. Receives the data URL as a string. */
+		onImageLoaded?: (dataUrl: string) => void;
+	}
 
-	const dispatch = createEventDispatcher();
+	let { onImageLoaded }: Props = $props();
+
 	let fileInput: HTMLInputElement = $state();
 
 	const preventDefault = (event: Event) => {
@@ -9,7 +13,7 @@
 	};
 
 	/**
-	 * Read the file and dispatch an event with the dataUrl
+	 * Read the file and call the onImageLoaded callback with the dataUrl
 	 * @param file The file to read
 	 */
 	const readFile = (file: File) => {
@@ -18,8 +22,8 @@
 		reader.onload = (e: ProgressEvent<FileReader>) => {
 			if (!e.target) return;
 
-			const dataUrl = e.target.result;
-			dispatch("imageLoaded", { dataUrl });
+			const dataUrl = e.target.result as string;
+			onImageLoaded?.(dataUrl);
 		};
 		reader.readAsDataURL(file);
 	};

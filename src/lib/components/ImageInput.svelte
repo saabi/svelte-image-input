@@ -63,7 +63,7 @@
 		/>
 		<button onclick={clearImageURL}>X</button>
 	{:else}
-		<ImageLoader on:imageLoaded={({ detail: { dataUrl } }) => (src = dataUrl)} />
+		<ImageLoader onImageLoaded={(dataUrl) => (src = dataUrl)} />
 	{/if}
 </div>
 
