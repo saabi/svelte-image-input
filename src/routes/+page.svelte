@@ -5,6 +5,7 @@
 	let quality = $state(0.9);
 	let theme = $state('default');
 	let language = $state<'en' | 'es' | 'fr'>('en');
+	let pasteScope = $state<'window' | 'component'>('window');
 
 	const translations: Record<'en' | 'es' | 'fr', { prefix: string; button: string }> = {
 		en: { prefix: 'Drop, paste, or', button: 'load an image' },
@@ -25,6 +26,12 @@
 		"Load an image" button. Then, resize and crop the image. The output
 		image will be displayed beside along with the final size in bytes of the
 		data URL.
+	</p>
+
+	<p>
+		<strong>Paste Scope:</strong> When set to "Window" (default), paste works anywhere on the page.
+		When set to "Component", paste only works when the component is focused (click on it first).
+		Try switching between modes and pasting an image!
 	</p>
 
 	<label>
@@ -57,6 +64,14 @@
 				<option value="fr">Français</option>
 			</select>
 		</label>
+
+		<label>
+			<span>Paste Scope: </span>
+			<select bind:value={pasteScope}>
+				<option value="window">Window (default)</option>
+				<option value="component">Component</option>
+			</select>
+		</label>
 	</div>
 
 	<div class='demo'>
@@ -68,6 +83,7 @@
 					{quality}
 					prefixText={currentText.prefix}
 					buttonText={currentText.button}
+					{pasteScope}
 				/>
 			</div>
 		</div>

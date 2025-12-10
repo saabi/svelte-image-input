@@ -7,6 +7,13 @@
 		prefixText?: string;
 		/** Text displayed on the load button. Default: "load an image" */
 		buttonText?: string;
+		/** 
+		 * Scope for paste event handling.
+		 * - 'window': Listen for paste events anywhere on the page (default)
+		 * - 'component': Only listen for paste events when component is focused
+		 * @default 'window'
+		 */
+		pasteScope?: 'window' | 'component';
 	}
 </script>
 
@@ -15,11 +22,13 @@
 	let {
 		onImageLoaded,
 		prefixText = 'Drop, paste, or',
-		buttonText = 'load an image'
+		buttonText = 'load an image',
+		pasteScope = 'window'
 	}: Props = $props();
 
 	// ===== REFS =====
 	let fileInput: HTMLInputElement = $state();
+	let dropAreaElement: HTMLDivElement = $state();
 
 	// ===== FUNCTIONS =====
 	const preventDefault = (event: Event) => {
@@ -66,6 +75,17 @@
 	};
 
 	const handlePaste = async (event: ClipboardEvent) => {
+		// For window scope, always handle. For component scope, only if focused.
+		if (pasteScope === 'component') {
+			// Only handle if component or its children are focused
+			if (!dropAreaElement || (
+				!dropAreaElement.contains(document.activeElement) && 
+				dropAreaElement !== document.activeElement
+			)) {
+				return;
+			}
+		}
+
 		const items = event.clipboardData?.items;
 		if (!items) return;
 
@@ -86,14 +106,18 @@
 	};
 </script>
 
-<svelte:window onpaste={handlePaste} />
+<svelte:window onpaste={pasteScope === 'window' ? handlePaste : undefined} />
 
 <div
+	bind:this={dropAreaElement}
 	class="drop-area"
+	role={pasteScope === 'component' ? 'button' : undefined}
+	tabindex={pasteScope === 'component' ? 0 : undefined}
 	ondrop={handleDrop}
 	ondragover={preventDefault}
 	ondragenter={preventDefault}
 	ondragleave={preventDefault}
+	onpaste={pasteScope === 'component' ? handlePaste : undefined}
 >
 	{prefixText}
 	<button onclick={handleButtonClick}>{buttonText}</button>
@@ -131,6 +155,12 @@
 	.drop-area:hover {
 		border-color: var(--image-loader-hover-border-color, #999);
 		background-color: var(--image-loader-hover-background-color, #f0f0f0);
+	}
+	
+	.drop-area:focus {
+		/* Box/Visual */
+		outline: 2px solid var(--image-loader-focus-outline-color, #4a7cf8);
+		outline-offset: 2px;
 	}
 	
 	button {

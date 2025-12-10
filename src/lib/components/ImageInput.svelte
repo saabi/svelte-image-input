@@ -27,6 +27,13 @@
 		prefixText?: string;
 		/** Text displayed on the load button in ImageLoader. Default: "load an image" */
 		buttonText?: string;
+		/** 
+		 * Scope for paste event handling in ImageLoader.
+		 * - 'window': Listen for paste events anywhere on the page (default)
+		 * - 'component': Only listen for paste events when component is focused
+		 * @default 'window'
+		 */
+		pasteScope?: 'window' | 'component';
 	}
 </script>
 
@@ -43,7 +50,8 @@
 		url = $bindable(''),
 		showCompressedResult = false,
 		prefixText,
-		buttonText
+		buttonText,
+		pasteScope
 	}: Props = $props();
 
 	// ===== EFFECTS =====
@@ -96,6 +104,7 @@
 			onImageLoaded={(dataUrl) => (src = dataUrl)}
 			{prefixText}
 			{buttonText}
+			{pasteScope}
 		/>
 	{/if}
 </div>
