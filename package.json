@@ -39,6 +39,7 @@
     "files": [
         "dist"
     ],
+    "license": "ISC",
     "name": "svelte-image-input",
     "peerDependencies": {
         "svelte": "^5.0.0"
