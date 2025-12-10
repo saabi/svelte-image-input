@@ -3,6 +3,7 @@
 
 	let url = $state('');
 	let quality = $state(0.9);
+	let theme = $state('default');
 </script>
 
 <div class="container">
@@ -28,10 +29,20 @@
 		/>
 	</label>
 
+	<label>
+		<span>Theme: </span>
+		<select bind:value={theme}>
+			<option value="default">Default</option>
+			<option value="dark">Dark</option>
+			<option value="brand">Brand</option>
+			<option value="sophisticated">Sophisticated</option>
+		</select>
+	</label>
+
 	<div class='demo'>
 		<div class='input'>
 			<h3>Input Image</h3>
-			<div class='imagebox'>
+			<div class='imagebox theme-{theme}'>
 				<ImageInput bind:url {quality} />
 			</div>
 		</div>
@@ -107,5 +118,61 @@
 	}
 	a:hover {
 		text-decoration: underline;
+	}
+
+	/* Theme Styles */
+	/* Default theme uses component defaults - no CSS overrides needed */
+
+	.theme-dark {
+		--image-loader-border-color: #666;
+		--image-loader-background-color: #2a2a2a;
+		--image-loader-text-color: #fff;
+		--image-loader-hover-border-color: #888;
+		--image-loader-hover-background-color: #333;
+		--image-loader-button-color: #fff;
+		--image-encoder-background-color: #1a1a1a;
+		--image-input-clear-button-color: #fff;
+		--image-input-clear-button-hover-background: rgba(255, 255, 255, 0.1);
+		--image-input-clear-button-hover-border-color: rgba(255, 255, 255, 0.2);
+	}
+
+	.theme-brand {
+		--image-loader-border-color: #4a7cf8;
+		--image-loader-background-color: #f0f4ff;
+		--image-loader-text-color: #333;
+		--image-loader-hover-border-color: #2a5cd6;
+		--image-loader-hover-background-color: #e0e8ff;
+		--image-loader-button-color: #4a7cf8;
+		--image-loader-button-hover-color: #2a5cd6;
+		--image-input-clear-button-color: #4a7cf8;
+		--image-input-clear-button-background: rgba(74, 124, 248, 0.1);
+		--image-input-clear-button-border-color: #4a7cf8;
+		--image-input-clear-button-border-radius: 50%;
+		--image-input-clear-button-hover-background: rgba(74, 124, 248, 0.2);
+		--image-input-clear-button-hover-border-color: #2a5cd6;
+	}
+
+	.theme-sophisticated {
+		--image-loader-border-color: #e8e8e8;
+		--image-loader-border-width: 1px;
+		--image-loader-border-style: solid;
+		--image-loader-border-radius: 12px;
+		--image-loader-background-color: #fafafa;
+		--image-loader-text-color: #5a5a5a;
+		--image-loader-hover-border-color: #d0d0d0;
+		--image-loader-hover-background-color: #f5f5f5;
+		--image-loader-button-color: #fff;
+		--image-loader-button-background: #6b7280;
+		--image-loader-button-border-width: 0;
+		--image-loader-button-border-radius: 24px;
+		--image-loader-button-hover-color: #fff;
+		--image-loader-button-hover-background: #4b5563;
+		--image-encoder-background-color: #ffffff;
+		--image-input-clear-button-color: #6b7280;
+		--image-input-clear-button-background: rgba(107, 114, 128, 0.1);
+		--image-input-clear-button-border-color: transparent;
+		--image-input-clear-button-border-radius: 50%;
+		--image-input-clear-button-hover-background: rgba(107, 114, 128, 0.2);
+		--image-input-clear-button-hover-border-color: transparent;
 	}
 </style>

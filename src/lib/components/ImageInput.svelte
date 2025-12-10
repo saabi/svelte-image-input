@@ -86,6 +86,9 @@
 		
 		/* Positioning */
 		position: relative;
+		
+		/* Background */
+		background: var(--image-input-background, transparent);
 	}
 	
 	.ImageInput > button {
@@ -94,7 +97,20 @@
 		top: 0.25em;
 		right: 0.25em;
 		
+		/* Styling */
+		color: var(--image-input-clear-button-color, inherit);
+		background: var(--image-input-clear-button-background, transparent);
+		border-color: var(--image-input-clear-button-border-color, transparent);
+		border-radius: var(--image-input-clear-button-border-radius, 0);
+		font-size: var(--image-input-clear-button-size, 1.5em);
+		
 		/* Misc/Overrides */
 		cursor: pointer;
+	}
+	
+	.ImageInput > button:hover {
+		color: var(--image-input-clear-button-hover-color, inherit);
+		background: var(--image-input-clear-button-hover-background, rgba(0, 0, 0, 0.1));
+		border-color: var(--image-input-clear-button-hover-border-color, transparent);
 	}
 </style>

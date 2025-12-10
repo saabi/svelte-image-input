@@ -183,6 +183,7 @@
 		
 		/* Misc/Overrides */
 		touch-action: none;
-		cursor: move;
+		cursor: var(--image-encoder-cursor, move);
+		background-color: var(--image-encoder-background-color, transparent);
 	}
 </style>

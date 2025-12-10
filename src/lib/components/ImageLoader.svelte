@@ -112,13 +112,37 @@
 		vertical-align: center;
 		
 		/* Box/Visual */
-		border: 2px dashed #ccc;
-		background-color: #f9f9f9;
+		border: var(--image-loader-border-width, 2px) 
+		        var(--image-loader-border-style, dashed) 
+		        var(--image-loader-border-color, #ccc);
+		border-radius: var(--image-loader-border-radius, 0);
+		background-color: var(--image-loader-background-color, #f9f9f9);
+		color: var(--image-loader-text-color, inherit);
+	}
+	
+	.drop-area:hover {
+		border-color: var(--image-loader-hover-border-color, #999);
+		background-color: var(--image-loader-hover-background-color, #f0f0f0);
 	}
 	
 	button {
 		/* Misc/Overrides */
 		cursor: pointer;
+		color: var(--image-loader-button-color, inherit);
+		background: var(--image-loader-button-background, transparent);
+		border-radius: var(--image-loader-button-border-radius, revert);
+		padding: 0.5em 1em;
+		transition: background-color 0.2s ease, color 0.2s ease;
+		/* Border: use browser default unless explicitly overridden */
+		border-width: var(--image-loader-button-border-width, revert);
+		border-style: var(--image-loader-button-border-style, revert);
+		border-color: var(--image-loader-button-border-color, revert);
+	}
+	
+	button:hover {
+		color: var(--image-loader-button-hover-color, inherit);
+		background: var(--image-loader-button-hover-background, transparent);
+		border-color: var(--image-loader-button-hover-border-color, revert);
 	}
 	
 	.hidden {
