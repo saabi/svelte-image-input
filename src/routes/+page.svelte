@@ -87,7 +87,7 @@
 				/>
 			</div>
 		</div>
-		
+
 		<div class='output'>
 			<h3>Output Image</h3>
 			<div class='imagebox'>
