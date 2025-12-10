@@ -1,45 +1,88 @@
 <script lang='ts'>
+	import { run } from 'svelte/legacy';
+
 	import type { Transform } from '../utils/pan-zoom.js';
 
 	import { panHandler } from '../utils/pan-zoom.js';
 	import { onMount } from 'svelte';
 
-	/**  The source URL of the image to be displayed in the canvas. */
-	export let src: string;
-	/** The data URL of the modified image. Updated on pan and zoom actions. This is an output property, so you must use the `bind:` directive to bind it to a variable.*/
-	export let url: string;
-	/** The image quality (0-1) for the JPEG output. Defaults to 0.5 */
-	export let quality: number;
-	/** The width of the canvas. Defaults to 256 */
-	export let width: number;
-	/** The height of the canvas. Defaults to 256 */
-	export let height: number;
-	/** Whether to update the data URL in real time. Defaults to false */
-	export let realTime: boolean;
-	/** Whether to allow cross-origin images. Defaults to false */
-	export let crossOrigin: boolean;
-	/** A space-separated list of classes to apply to the canvas element. */
-	export let classes: string;
-	/** Whether to show the compressed result. Defaults to false */
-	export let showCompressedResult: boolean;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	interface Props {
+		/**  The source URL of the image to be displayed in the canvas. */
+		src: string;
+		/** The data URL of the modified image. Updated on pan and zoom actions. This is an output property, so you must use the `bind:` directive to bind it to a variable.*/
+		url: string;
+		/** The image quality (0-1) for the JPEG output. Defaults to 0.5 */
+		quality: number;
+		/** The width of the canvas. Defaults to 256 */
+		width: number;
+		/** The height of the canvas. Defaults to 256 */
+		height: number;
+		/** Whether to update the data URL in real time. Defaults to false */
+		realTime: boolean;
+		/** Whether to allow cross-origin images. Defaults to false */
+		crossOrigin: boolean;
+		/** A space-separated list of classes to apply to the canvas element. */
+		classes: string;
+		/** Whether to show the compressed result. Defaults to false */
+		showCompressedResult: boolean;
+	}
 
-	$: src = src || '';
-	$: url = url || '';
-	$: width = width || 256;
-	$: height = height || 256;
-	$: quality = quality || 0.5;
-	$: realTime = realTime || false;
-	$: crossOrigin = crossOrigin || false;
-	$: classes = classes || '';
-	$: showCompressedResult = showCompressedResult || false;
+	let {
+		src = $bindable(),
+		url = $bindable(),
+		quality = $bindable(),
+		width = $bindable(),
+		height = $bindable(),
+		realTime = $bindable(),
+		crossOrigin = $bindable(),
+		classes = $bindable(),
+		showCompressedResult = $bindable()
+	}: Props = $props();
 
-	let canvas: HTMLCanvasElement;
-	let img: HTMLImageElement | undefined;
+	run(() => {
+		src = src || '';
+	});
+	run(() => {
+		url = url || '';
+	});
+	run(() => {
+		width = width || 256;
+	});
+	run(() => {
+		height = height || 256;
+	});
+	run(() => {
+		quality = quality || 0.5;
+	});
+	run(() => {
+		realTime = realTime || false;
+	});
+	run(() => {
+		crossOrigin = crossOrigin || false;
+	});
+	run(() => {
+		classes = classes || '';
+	});
+	run(() => {
+		showCompressedResult = showCompressedResult || false;
+	});
+
+	let canvas: HTMLCanvasElement = $state();
+	let img: HTMLImageElement | undefined = $state();
 	let ctx: CanvasRenderingContext2D | null;
 
-	let offsetX = 0;
-	let offsetY = 0;
-	let scale = 1;
+	let offsetX = $state(0);
+	let offsetY = $state(0);
+	let scale = $state(1);
 	let minScale = 1;
 	let dragging = false;
 
@@ -95,9 +138,15 @@
 		if (realTime || !dragging) url = canvas.toDataURL('image/jpeg', quality);
 	}
 
-	$: img && (img.crossOrigin = crossOrigin ? 'anonymous' : null);
-	$: img && (img.src = src);
-	$: quality, width, height, offsetX, offsetY, scale, redraw();
+	run(() => {
+		img && (img.crossOrigin = crossOrigin ? 'anonymous' : null);
+	});
+	run(() => {
+		img && (img.src = src);
+	});
+	run(() => {
+		quality, width, height, offsetX, offsetY, scale, redraw();
+	});
 
 	onMount(() => {
 		ctx = canvas.getContext('2d');
@@ -110,7 +159,7 @@
 	});
 </script>
 
-<canvas bind:this={canvas} {width} {height} class={classes} use:panHandler={transform} />
+<canvas bind:this={canvas} {width} {height} class={classes} use:panHandler={transform}></canvas>
 
 <style>
 	canvas {

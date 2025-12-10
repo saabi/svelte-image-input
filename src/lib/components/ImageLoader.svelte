@@ -2,7 +2,7 @@
 	import { createEventDispatcher } from "svelte";
 
 	const dispatch = createEventDispatcher();
-	let fileInput: HTMLInputElement;
+	let fileInput: HTMLInputElement = $state();
 
 	const preventDefault = (event: Event) => {
 		event.preventDefault();
@@ -68,24 +68,24 @@
 	};
 </script>
 
-<svelte:window on:paste={handlePaste} />
+<svelte:window onpaste={handlePaste} />
 
 <div
 	class="drop-area"
-	on:drop={handleDrop}
-	on:dragover={preventDefault}
-	on:dragenter={preventDefault}
-	on:dragleave={preventDefault}
+	ondrop={handleDrop}
+	ondragover={preventDefault}
+	ondragenter={preventDefault}
+	ondragleave={preventDefault}
 >
 	Drop, paste, or
-	<button on:click={handleButtonClick}>load an image</button>
+	<button onclick={handleButtonClick}>load an image</button>
 </div>
 <input
 	type="file"
 	accept="image/*"
 	bind:this={fileInput}
 	class="hidden"
-	on:change={handleFileChange}
+	onchange={handleFileChange}
 />
 
 <style>

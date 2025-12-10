@@ -1,8 +1,8 @@
 <script>
 	import ImageInput from '$lib/components/ImageInput.svelte';
 
-	let url = '';
-	let quality = 0.9;
+	let url = $state('');
+	let quality = $state(0.9);
 </script>
 
 <div class="container">
