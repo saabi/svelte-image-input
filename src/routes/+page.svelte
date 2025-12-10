@@ -47,7 +47,7 @@
 
 	<div class="controls">
 		<label>
-			<span>Theme: </span>
+			<span>Theme: <a href="https://github.com/saabi/svelte-image-input/blob/main/docs/theming.md" target="_blank" rel="noopener noreferrer" class="doc-link" title="Theming documentation">📖</a></span>
 			<select bind:value={theme}>
 				<option value="default">Default</option>
 				<option value="dark">Dark</option>
@@ -57,7 +57,7 @@
 		</label>
 
 		<label>
-			<span>Language: </span>
+			<span>Language: <a href="https://github.com/saabi/svelte-image-input/blob/main/docs/i18n.md" target="_blank" rel="noopener noreferrer" class="doc-link" title="Internationalization documentation">📖</a></span>
 			<select bind:value={language}>
 				<option value="en">English</option>
 				<option value="es">Español</option>
@@ -66,7 +66,7 @@
 		</label>
 
 		<label>
-			<span>Paste Scope: </span>
+			<span>Paste Scope: <a href="https://github.com/saabi/svelte-image-input/blob/main/docs/paste-scope.md" target="_blank" rel="noopener noreferrer" class="doc-link" title="Paste scope documentation">📖</a></span>
 			<select bind:value={pasteScope}>
 				<option value="window">Window (default)</option>
 				<option value="component">Component</option>
@@ -99,6 +99,16 @@
 				<p>data url size: {url.length} bytes</p>
 			{/if}
 		</div>
+	</div>
+
+	<div class="documentation">
+		<h2>Documentation</h2>
+		<p>Learn more about the features demonstrated above:</p>
+		<ul>
+			<li><a href="https://github.com/saabi/svelte-image-input/blob/main/docs/theming.md" target="_blank" rel="noopener noreferrer">Theming Guide</a> - Customize component appearance with CSS variables</li>
+			<li><a href="https://github.com/saabi/svelte-image-input/blob/main/docs/i18n.md" target="_blank" rel="noopener noreferrer">Internationalization (i18n)</a> - Customize text labels and support multiple languages</li>
+			<li><a href="https://github.com/saabi/svelte-image-input/blob/main/docs/paste-scope.md" target="_blank" rel="noopener noreferrer">Paste Scope Control</a> - Control how paste events are handled</li>
+		</ul>
 	</div>
 
 	<p>
@@ -167,6 +177,40 @@
 	}
 	a:hover {
 		text-decoration: underline;
+	}
+
+	.doc-link {
+		font-size: 0.9em;
+		margin-left: 0.25em;
+		opacity: 0.7;
+		transition: opacity 0.2s ease;
+	}
+	.doc-link:hover {
+		opacity: 1;
+		text-decoration: none;
+	}
+
+	.documentation {
+		margin-top: 2rem;
+		padding-top: 2rem;
+		border-top: 1px solid #e0e0e0;
+		width: 100%;
+	}
+	.documentation ul {
+		list-style: none;
+		padding: 0;
+		margin: 1rem 0;
+	}
+	.documentation li {
+		margin: 0.5rem 0;
+		padding-left: 1.5rem;
+		position: relative;
+	}
+	.documentation li::before {
+		content: "→";
+		position: absolute;
+		left: 0;
+		color: var(--primary-color);
 	}
 
 	/* Theme Styles */
