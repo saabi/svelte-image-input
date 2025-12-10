@@ -28,7 +28,7 @@
 
 <script lang="ts">
 	// ===== IMPORTS =====
-	import { onMount } from 'svelte';
+	import { onMount, untrack } from 'svelte';
 
 	// ===== PROPS =====
 	let {
@@ -90,38 +90,30 @@
 	};
 
 	// ===== EFFECTS =====
+	// Default value effects - use untrack to prevent loops when writing to the same prop
 	$effect(() => {
-		width ??= 256;
+		if (width == null || width === 0) untrack(() => { width = 256; });
 	});
 	$effect(() => {
-		height ??= 256;
+		if (height == null || height === 0) untrack(() => { height = 256; });
 	});
 	$effect(() => {
-		src = src || '';
+		if (!src) untrack(() => { src = ''; });
 	});
 	$effect(() => {
-		url = url || '';
+		if (!quality) untrack(() => { quality = 0.5; });
 	});
 	$effect(() => {
-		width = width || 256;
+		if (realTime == null) untrack(() => { realTime = false; });
 	});
 	$effect(() => {
-		height = height || 256;
+		if (crossOrigin == null) untrack(() => { crossOrigin = false; });
 	});
 	$effect(() => {
-		quality = quality || 0.5;
+		if (classes == null) untrack(() => { classes = ''; });
 	});
 	$effect(() => {
-		realTime = realTime || false;
-	});
-	$effect(() => {
-		crossOrigin = crossOrigin || false;
-	});
-	$effect(() => {
-		classes = classes || '';
-	});
-	$effect(() => {
-		showCompressedResult = showCompressedResult || false;
+		if (showCompressedResult == null) untrack(() => { showCompressedResult = false; });
 	});
 	$effect(() => {
 		if (img) {
@@ -133,14 +125,18 @@
 			img.src = src;
 		}
 	});
+	// Redraw effect - reads state but calls redraw which may write state
+	// Use untrack for the redraw call to prevent infinite loops
 	$effect(() => {
-		quality;
-		width;
-		height;
-		offsetX;
-		offsetY;
-		scale;
-		redraw();
+		// Read dependencies to track them
+		const _quality = quality;
+		const _width = width;
+		const _height = height;
+		const _offsetX = offsetX;
+		const _offsetY = offsetY;
+		const _scale = scale;
+		// Call redraw without tracking its internal state modifications
+		untrack(() => redraw());
 	});
 
 	// ===== LIFECYCLE =====
@@ -157,6 +153,7 @@
 	// ===== FUNCTIONS =====
 	function redraw () {
 		if (!img || !ctx) return;
+		// Clamp offsets - these writes won't trigger the effect due to untrack
 		if (offsetX < 0) offsetX = 0;
 		if (offsetY < 0) offsetY = 0;
 		let limit = img.width * scale - width;
