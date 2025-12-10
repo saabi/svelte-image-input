@@ -48,7 +48,7 @@
         "build": "vite build && npm run package",
         "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
         "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-        "deploy": "touch build/.nojekyll && gh-pages -d build -t true",
+        "deploy": "touch build/.nojekyll && gh-pages -d build -t",
         "dev": "vite dev",
         "format": "prettier --plugin-search-dir . --write .",
         "lint": "prettier --plugin-search-dir . --check . && eslint .",

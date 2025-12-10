@@ -31,35 +31,46 @@ Once an image is loaded, the component switches to display the `ImageEncoder` co
 	import {ImageInput} from 'svelte-image-input';
 
 	let url = '';
+	let src = '';
 </script>
 
 <ImageInput
 	bind:url
 	{src}
-	{width}
-	{height}
-	{quality}
-	{realTime}
-	{crossOrigin}
-	{classes}
-	{showCompressedResult}
+	width={256}
+	height={256}
+	quality={0.5}
+	realTime={false}
+	crossOrigin={false}
+	classes=""
+	showCompressedResult={false}
+	prefixText="Drop, paste, or"
+	buttonText="load an image"
+	pasteScope="window"
 />
 ```
 
 ### Props
 
-- `src`: The source URL of the image to be displayed in the canvas. Defaults to an empty string.
-- `url`: The data URL of the modified image. Updated on pan and zoom actions. This is an output property, so you must use the `bind:` directive to bind it to a variable.
-- `width`: The width of the canvas. Defaults to 256.
-- `height`: The height of the canvas. Defaults to 256.
-- `quality`: The image quality (0-1) for the JPEG output. Defaults to 0.5.
-- `realTime`: Whether to update the data URL in real time. Defaults to false.
-- `crossOrigin`: Whether to allow cross-origin images. Defaults to false.
-- `classes`: A space-separated list of classes to apply to the canvas element.
-- `showCompressedResult`: Whether to show the compressed result. Defaults to false.
-- `prefixText`: Text displayed before the button in ImageLoader (default: `"Drop, paste, or"`). See [i18n documentation](docs/i18n.md).
-- `buttonText`: Text displayed on the load button in ImageLoader (default: `"load an image"`). See [i18n documentation](docs/i18n.md).
-- `pasteScope`: Control paste event scope - `'window'` (default) or `'component'`. See [paste scope documentation](docs/paste-scope.md).
+#### ImageEncoder Props (passed through to ImageEncoder)
+
+- `src?: string` - The source URL of the image to be displayed in the canvas. Defaults to an empty string.
+- `url?: string` - The data URL of the modified image. Updated on pan and zoom actions. This is an output property, so you must use the `bind:` directive to bind it to a variable.
+- `width?: number` - The width of the canvas. Defaults to `256`.
+- `height?: number` - The height of the canvas. Defaults to `256`.
+- `quality?: number` - The image quality (0-1) for the JPEG output. Defaults to `0.5`.
+- `realTime?: boolean` - Whether to update the data URL in real time. Defaults to `false`.
+- `crossOrigin?: boolean` - Whether to allow cross-origin images. Defaults to `false`.
+- `classes?: string` - A space-separated list of classes to apply to the canvas element.
+- `showCompressedResult?: boolean` - Whether to show the compressed result. Defaults to `false`.
+
+#### ImageLoader Props (passed through to ImageLoader)
+
+- `prefixText?: string` - Text displayed before the button in ImageLoader. Default: `"Drop, paste, or"`. See [i18n documentation](docs/i18n.md).
+- `buttonText?: string` - Text displayed on the load button in ImageLoader. Default: `"load an image"`. See [i18n documentation](docs/i18n.md).
+- `pasteScope?: 'window' | 'component'` - Control paste event scope. Default: `'window'`. See [paste scope documentation](docs/paste-scope.md).
+  - `'window'`: Paste events anywhere on the page trigger image loading (default)
+  - `'component'`: Paste events only work when the component is focused
 
 ## `ImageLoader` Component
 > Paste, drop or load images in Svelte
@@ -79,15 +90,22 @@ To use the component, add the `ImageLoader` component to your Svelte app and pro
 	}
 </script>
 
-<ImageLoader onImageLoaded={handleImageLoaded} />
+<ImageLoader
+	onImageLoaded={handleImageLoaded}
+	prefixText="Drop, paste, or"
+	buttonText="load an image"
+	pasteScope="window"
+/>
 ```
 
 ### Props
 
-- `onImageLoaded`: Callback function called when an image is loaded. Receives the data URL as a string.
-- `prefixText`: Text displayed before the button (default: `"Drop, paste, or"`). See [i18n documentation](docs/i18n.md).
-- `buttonText`: Text displayed on the load button (default: `"load an image"`). See [i18n documentation](docs/i18n.md).
-- `pasteScope`: Control paste event scope - `'window'` (default) or `'component'`. See [paste scope documentation](docs/paste-scope.md).
+- `onImageLoaded?: (dataUrl: string) => void` - Callback function called when an image is loaded. Receives the data URL as a string.
+- `prefixText?: string` - Text displayed before the button. Default: `"Drop, paste, or"`. See [i18n documentation](docs/i18n.md).
+- `buttonText?: string` - Text displayed on the load button. Default: `"load an image"`. See [i18n documentation](docs/i18n.md).
+- `pasteScope?: 'window' | 'component'` - Control paste event scope. Default: `'window'`. See [paste scope documentation](docs/paste-scope.md).
+  - `'window'`: Paste events anywhere on the page trigger image loading (default)
+  - `'component'`: Paste events only work when the component is focused
 
 ## `ImageEncoder` Component
 >Pan, Zoom, and Compress Images in Svelte
@@ -99,32 +117,35 @@ This Svelte component allows you to display an image in a canvas, apply pan and 
 ```html
 <script>
 	import {ImageEncoder} from 'svelte-image-input';
+
+	let outputUrl = '';
+	let imageUrl = 'https://example.com/image.jpg';
 </script>
 
 <ImageEncoder
-	src="{yourImageUrl}"
-	url="{outputUrl}"
-	quality={0.5}
+	bind:url={outputUrl}
+	src={imageUrl}
 	width={256}
 	height={256}
+	quality={0.5}
 	realTime={false}
 	crossOrigin={false}
-	classes="{yourCustomClass}"
+	classes=""
 	showCompressedResult={false}
 />
 ```
 
 ### Props
 
-- `src: string`: The source URL of the image to be displayed in the canvas.
-- `url: string`: The data URL of the modified image. Updated on pan and zoom actions. This is an output property, so you must use the `bind:` directive to bind it to a variable.
-- `quality: number`: The image quality (0-1) for the JPEG output. Defaults to 0.5.
-- `width: number`: The width of the canvas. Defaults to 256.
-- `height: number`: The height of the canvas. Defaults to 256.
-- `realTime: boolean`: Whether to update the data URL in real time. Defaults to false.
-- `crossOrigin: boolean`: Whether to allow cross-origin images. Defaults to false.
-- `classes: string`: A space-separated list of classes to apply to the canvas element.
-- `showCompressedResult: boolean`: Whether to show the compressed result. Defaults to false.
+- `src: string` - **Required.** The source URL of the image to be displayed in the canvas.
+- `url: string` - **Required.** The data URL of the modified image. Updated on pan and zoom actions. This is an output property, so you must use the `bind:` directive to bind it to a variable.
+- `quality: number` - The image quality (0-1) for the JPEG output. Defaults to `0.5`.
+- `width: number` - The width of the canvas. Defaults to `256`.
+- `height: number` - The height of the canvas. Defaults to `256`.
+- `realTime: boolean` - Whether to update the data URL in real time. Defaults to `false`.
+- `crossOrigin: boolean` - Whether to allow cross-origin images. Defaults to `false`.
+- `classes: string` - A space-separated list of classes to apply to the canvas element.
+- `showCompressedResult: boolean` - Whether to show the compressed result. Defaults to `false`.
 
 ## Documentation
 
