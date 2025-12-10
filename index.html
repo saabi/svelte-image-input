@@ -5,36 +5,38 @@
 		<link rel="icon" href="./favicon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		
-		<link href="./_app/immutable/assets/2.B5Q6PMCR.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.BgZ3gHiU.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/CZ7i47rh.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/B_w9vmgx.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/B1mtZjfV.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.Bka_m_-c.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/BbTVkiE4.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/C8nwTL5x.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/Dz2eJi9S.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/DkVZkZLs.js">
-		<link rel="modulepreload" href="./_app/immutable/nodes/0.DhYz2AyL.js">
-		<link rel="modulepreload" href="./_app/immutable/nodes/2.DEaPX2Pd.js">
+		<link href="./_app/immutable/assets/2.CCBgzU24.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.X4C0CXzR.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/D983yaTD.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/BNId94n6.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/BTepG1_1.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.UAbWT2L_.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/FkihRly-.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/DjZE1KvE.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/BvPhMpWX.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/BSR7e1sK.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/0.CX53yZMr.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/2.Uo3alxFX.js">
 	</head>
 	<body>
 		<div><!--[--><!--[--><!----><!----><div class="container svelte-1uha8ag"><h1 class="svelte-1uha8ag">Svelte Image Input and Manipulation Components</h1> <h2 class="svelte-1uha8ag">ImageInput Example</h2> <p class="svelte-1uha8ag">Load an image using drag and drop, clipboard paste, or by clicking the
 		"Load an image" button. Then, resize and crop the image. The output
 		image will be displayed beside along with the final size in bytes of the
-		data URL.</p> <label><span>Quality (90%):</span> <input type="range" min="0.1" max="1" step="0.1" value="0.9"/></label> <div class="demo svelte-1uha8ag"><div class="input"><h3 class="svelte-1uha8ag">Input Image</h3> <div class="imagebox svelte-1uha8ag"><div class="ImageInput svelte-huqjm5" style="--image-input-width: px; --image-input-height: px"><!--[!--><div class="drop-area svelte-186px3q">Drop, paste, or <button class="svelte-186px3q">load an image</button></div> <input type="file" accept="image/*" class="hidden svelte-186px3q"/><!--]--></div><!----></div></div> <div class="output"><h3 class="svelte-1uha8ag">Output Image</h3> <div class="imagebox svelte-1uha8ag"><!--[!--><!--]--></div> <!--[!--><!--]--></div></div> <p class="svelte-1uha8ag">Check out the code on <a href="https://github.com/saabi/svelte-image-input" target="_blank" rel="noopener noreferrer" class="svelte-1uha8ag">GitHub</a>.</p></div><!----><!----><!----><!--]--> <!--[!--><!--]--><!--]-->
+		data URL.</p> <p class="svelte-1uha8ag"><strong>Paste Scope:</strong> When set to "Window" (default), paste works anywhere on the page.
+		When set to "Component", paste only works when the component is focused (click on it first).
+		Try switching between modes and pasting an image!</p> <label><span>Quality (90%):</span> <input type="range" min="0.1" max="1" step="0.1" value="0.9"/></label> <div class="controls svelte-1uha8ag"><label><span>Theme: <a href="https://github.com/saabi/svelte-image-input/blob/main/docs/theming.md" target="_blank" rel="noopener noreferrer" class="doc-link svelte-1uha8ag" title="Theming documentation">📖</a></span> <select><option value="default" selected>Default</option><option value="dark">Dark</option><option value="brand">Brand</option><option value="sophisticated">Sophisticated</option></select></label> <label><span>Language: <a href="https://github.com/saabi/svelte-image-input/blob/main/docs/i18n.md" target="_blank" rel="noopener noreferrer" class="doc-link svelte-1uha8ag" title="Internationalization documentation">📖</a></span> <select><option value="en" selected>English</option><option value="es">Español</option><option value="fr">Français</option></select></label> <label><span>Paste Scope: <a href="https://github.com/saabi/svelte-image-input/blob/main/docs/paste-scope.md" target="_blank" rel="noopener noreferrer" class="doc-link svelte-1uha8ag" title="Paste scope documentation">📖</a></span> <select><option value="window" selected>Window (default)</option><option value="component">Component</option></select></label></div> <div class="demo svelte-1uha8ag"><div class="input"><h3 class="svelte-1uha8ag">Input Image</h3> <div class="imagebox theme-default svelte-1uha8ag"><div class="ImageInput svelte-huqjm5" style="--image-input-width: px; --image-input-height: px"><!--[!--><div class="drop-area svelte-186px3q">Drop, paste, or <button class="svelte-186px3q">load an image</button></div> <input type="file" accept="image/*" class="hidden svelte-186px3q"/><!--]--></div><!----></div></div> <div class="output"><h3 class="svelte-1uha8ag">Output Image</h3> <div class="imagebox svelte-1uha8ag"><!--[!--><!--]--></div> <!--[!--><!--]--></div></div> <div class="documentation svelte-1uha8ag"><h2 class="svelte-1uha8ag">Documentation</h2> <p class="svelte-1uha8ag">Learn more about the features demonstrated above:</p> <ul class="svelte-1uha8ag"><li class="svelte-1uha8ag"><a href="https://github.com/saabi/svelte-image-input/blob/main/docs/theming.md" target="_blank" rel="noopener noreferrer" class="svelte-1uha8ag">Theming Guide</a> - Customize component appearance with CSS variables</li> <li class="svelte-1uha8ag"><a href="https://github.com/saabi/svelte-image-input/blob/main/docs/i18n.md" target="_blank" rel="noopener noreferrer" class="svelte-1uha8ag">Internationalization (i18n)</a> - Customize text labels and support multiple languages</li> <li class="svelte-1uha8ag"><a href="https://github.com/saabi/svelte-image-input/blob/main/docs/paste-scope.md" target="_blank" rel="noopener noreferrer" class="svelte-1uha8ag">Paste Scope Control</a> - Control how paste events are handled</li></ul></div> <p class="svelte-1uha8ag">Check out the code on <a href="https://github.com/saabi/svelte-image-input" target="_blank" rel="noopener noreferrer" class="svelte-1uha8ag">GitHub</a>.</p></div><!----><!----><!----><!--]--> <!--[!--><!--]--><!--]-->
 			
 			<script>
 				{
-					__sveltekit_a77d7a = {
+					__sveltekit_154tptg = {
 						base: new URL(".", location).pathname.slice(0, -1)
 					};
 
 					const element = document.currentScript.parentElement;
 
 					Promise.all([
-						import("./_app/immutable/entry/start.BgZ3gHiU.js"),
-						import("./_app/immutable/entry/app.Bka_m_-c.js")
+						import("./_app/immutable/entry/start.X4C0CXzR.js"),
+						import("./_app/immutable/entry/app.UAbWT2L_.js")
 					]).then(([kit, app]) => {
 						kit.start(app, element, {
 							node_ids: [0, 2],
