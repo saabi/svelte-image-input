@@ -44,11 +44,11 @@ All components support theming through CSS custom properties. You can override t
 
 #### Clear Button
 - `--image-input-clear-button-color`: Clear button color (default: `inherit`)
-- `--image-input-clear-button-background`: Clear button background (default: `transparent`)
+- `--image-input-clear-button-background`: Clear button background color (default: `rgba(0, 0, 0, 0.1)`)
 - `--image-input-clear-button-border-color`: Clear button border color (default: `transparent`)
 - `--image-input-clear-button-border-radius`: Clear button border radius (default: `0`)
 - `--image-input-clear-button-hover-color`: Clear button color on hover (default: `inherit`)
-- `--image-input-clear-button-hover-background`: Clear button background on hover (default: `rgba(0, 0, 0, 0.1)`)
+- `--image-input-clear-button-hover-background`: Clear button background color on hover (default: `rgba(0, 0, 0, 0.2)`)
 - `--image-input-clear-button-hover-border-color`: Clear button border color on hover (default: `transparent`)
 - `--image-input-clear-button-size`: Clear button font size (default: `1.5em`)
 

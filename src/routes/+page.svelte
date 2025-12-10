@@ -1,9 +1,18 @@
-<script>
+<script lang="ts">
 	import ImageInput from '$lib/components/ImageInput.svelte';
 
 	let url = $state('');
 	let quality = $state(0.9);
 	let theme = $state('default');
+	let language = $state<'en' | 'es' | 'fr'>('en');
+
+	const translations: Record<'en' | 'es' | 'fr', { prefix: string; button: string }> = {
+		en: { prefix: 'Drop, paste, or', button: 'load an image' },
+		es: { prefix: 'Arrastra, pega o', button: 'carga una imagen' },
+		fr: { prefix: 'Glissez, collez ou', button: 'chargez une image' }
+	};
+
+	let currentText = $derived(translations[language]);
 </script>
 
 <div class="container">
@@ -29,21 +38,37 @@
 		/>
 	</label>
 
-	<label>
-		<span>Theme: </span>
-		<select bind:value={theme}>
-			<option value="default">Default</option>
-			<option value="dark">Dark</option>
-			<option value="brand">Brand</option>
-			<option value="sophisticated">Sophisticated</option>
-		</select>
-	</label>
+	<div class="controls">
+		<label>
+			<span>Theme: </span>
+			<select bind:value={theme}>
+				<option value="default">Default</option>
+				<option value="dark">Dark</option>
+				<option value="brand">Brand</option>
+				<option value="sophisticated">Sophisticated</option>
+			</select>
+		</label>
+
+		<label>
+			<span>Language: </span>
+			<select bind:value={language}>
+				<option value="en">English</option>
+				<option value="es">Español</option>
+				<option value="fr">Français</option>
+			</select>
+		</label>
+	</div>
 
 	<div class='demo'>
 		<div class='input'>
 			<h3>Input Image</h3>
 			<div class='imagebox theme-{theme}'>
-				<ImageInput bind:url {quality} />
+				<ImageInput
+					bind:url
+					{quality}
+					prefixText={currentText.prefix}
+					buttonText={currentText.button}
+				/>
 			</div>
 		</div>
 		
@@ -97,6 +122,14 @@
 		color: var(--primary-color);
 	}
 
+	.controls {
+		display: flex;
+		gap: 1rem;
+		margin-top: 1rem;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
 	.demo {
 		display: grid;
 		grid-auto-flow: column;
@@ -144,11 +177,11 @@
 		--image-loader-hover-background-color: #e0e8ff;
 		--image-loader-button-color: #4a7cf8;
 		--image-loader-button-hover-color: #2a5cd6;
-		--image-input-clear-button-color: #4a7cf8;
-		--image-input-clear-button-background: rgba(74, 124, 248, 0.1);
+		--image-input-clear-button-color: #fff;
+		--image-input-clear-button-background: rgba(74, 124, 248, 0.8);
 		--image-input-clear-button-border-color: #4a7cf8;
 		--image-input-clear-button-border-radius: 50%;
-		--image-input-clear-button-hover-background: rgba(74, 124, 248, 0.2);
+		--image-input-clear-button-hover-background: rgba(74, 124, 248, 1);
 		--image-input-clear-button-hover-border-color: #2a5cd6;
 	}
 
@@ -168,11 +201,11 @@
 		--image-loader-button-hover-color: #fff;
 		--image-loader-button-hover-background: #4b5563;
 		--image-encoder-background-color: #ffffff;
-		--image-input-clear-button-color: #6b7280;
-		--image-input-clear-button-background: rgba(107, 114, 128, 0.1);
+		--image-input-clear-button-color: #fff;
+		--image-input-clear-button-background: rgba(107, 114, 128, 0.8);
 		--image-input-clear-button-border-color: transparent;
 		--image-input-clear-button-border-radius: 50%;
-		--image-input-clear-button-hover-background: rgba(107, 114, 128, 0.2);
+		--image-input-clear-button-hover-background: rgba(107, 114, 128, 1);
 		--image-input-clear-button-hover-border-color: transparent;
 	}
 </style>

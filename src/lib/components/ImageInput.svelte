@@ -23,6 +23,10 @@
 		url?: string;
 		/** Whether to show the compressed result. Defaults to false */
 		showCompressedResult?: boolean;
+		/** Text displayed before the button in ImageLoader. Default: "Drop, paste, or" */
+		prefixText?: string;
+		/** Text displayed on the load button in ImageLoader. Default: "load an image" */
+		buttonText?: string;
 	}
 </script>
 
@@ -37,7 +41,9 @@
 		quality = 0.5,
 		realTime = false,
 		url = $bindable(''),
-		showCompressedResult = false
+		showCompressedResult = false,
+		prefixText,
+		buttonText
 	}: Props = $props();
 
 	// ===== EFFECTS =====
@@ -68,14 +74,37 @@
 			{width}
 			bind:url
 		/>
-		<button onclick={clearImageURL}>X</button>
+		<button onclick={clearImageURL} aria-label="Clear image">
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="16"
+				height="16"
+				viewBox="0 0 16 16"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				style="display: block;"
+			>
+				<line x1="4" y1="4" x2="12" y2="12" />
+				<line x1="12" y1="4" x2="4" y2="12" />
+			</svg>
+		</button>
 	{:else}
-		<ImageLoader onImageLoaded={(dataUrl) => (src = dataUrl)} />
+		<ImageLoader
+			onImageLoaded={(dataUrl) => (src = dataUrl)}
+			{prefixText}
+			{buttonText}
+		/>
 	{/if}
 </div>
 
 <style>
 	.ImageInput {
+		/* Positioning */
+		position: relative;
+		
 		/* Layout */
 		box-sizing: content-box;
 		display: grid;
@@ -84,10 +113,7 @@
 		width: var(--image-input-width);
 		height: var(--image-input-height);
 		
-		/* Positioning */
-		position: relative;
-		
-		/* Background */
+		/* Box/Visual */
 		background: var(--image-input-background, transparent);
 	}
 	
@@ -97,20 +123,43 @@
 		top: 0.25em;
 		right: 0.25em;
 		
-		/* Styling */
-		color: var(--image-input-clear-button-color, inherit);
-		background: var(--image-input-clear-button-background, transparent);
+		/* Layout */
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.25em;
+		line-height: 1;
+		
+		/* Box/Visual */
+		border: none;
 		border-color: var(--image-input-clear-button-border-color, transparent);
 		border-radius: var(--image-input-clear-button-border-radius, 0);
-		font-size: var(--image-input-clear-button-size, 1.5em);
+		background-color: var(--image-input-clear-button-background, rgba(0, 0, 0, 0.1));
+		
+		/* Typography */
+		color: var(--image-input-clear-button-color, inherit);
 		
 		/* Misc/Overrides */
 		cursor: pointer;
 	}
 	
+	.ImageInput > button svg {
+		/* Layout */
+		display: block;
+		width: var(--image-input-clear-button-size, 1em);
+		height: var(--image-input-clear-button-size, 1em);
+		margin: 0;
+		
+		/* Box/Visual */
+		stroke: currentColor;
+	}
+	
 	.ImageInput > button:hover {
-		color: var(--image-input-clear-button-hover-color, inherit);
-		background: var(--image-input-clear-button-hover-background, rgba(0, 0, 0, 0.1));
+		/* Box/Visual */
 		border-color: var(--image-input-clear-button-hover-border-color, transparent);
+		background-color: var(--image-input-clear-button-hover-background, rgba(0, 0, 0, 0.2));
+		
+		/* Typography */
+		color: var(--image-input-clear-button-hover-color, inherit);
 	}
 </style>
