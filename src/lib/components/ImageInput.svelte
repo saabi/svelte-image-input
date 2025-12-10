@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
-
 	import ImageEncoder from './ImageEncoder.svelte';
 	import ImageLoader from './ImageLoader.svelte';
 
@@ -29,8 +27,8 @@
 		classes = '',
 		crossOrigin = false,
 		src = $bindable(''),
-		width = $bindable(256),
-		height = $bindable(256),
+		width = $bindable(),
+		height = $bindable(),
 		quality = 0.5,
 		realTime = false,
 		url = $bindable(''),
@@ -42,11 +40,11 @@
 		url='';
 	};
 	
-	run(() => {
-		width ??= width ?? 256;
+	$effect(() => {
+		width ??= 256;
 	});
-	run(() => {
-		height = height ?? 256;
+	$effect(() => {
+		height ??= 256;
 	});
 </script>
 

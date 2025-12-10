@@ -1,6 +1,4 @@
 <script lang='ts'>
-	import { run } from 'svelte/legacy';
-
 	import type { Transform } from '../utils/pan-zoom.js';
 
 	import { panHandler } from '../utils/pan-zoom.js';
@@ -48,31 +46,37 @@
 		showCompressedResult = $bindable()
 	}: Props = $props();
 
-	run(() => {
+	$effect(() => {
+		width ??= 256;
+	});
+	$effect(() => {
+		height ??= 256;
+	});
+	$effect(() => {
 		src = src || '';
 	});
-	run(() => {
+	$effect(() => {
 		url = url || '';
 	});
-	run(() => {
+	$effect(() => {
 		width = width || 256;
 	});
-	run(() => {
+	$effect(() => {
 		height = height || 256;
 	});
-	run(() => {
+	$effect(() => {
 		quality = quality || 0.5;
 	});
-	run(() => {
+	$effect(() => {
 		realTime = realTime || false;
 	});
-	run(() => {
+	$effect(() => {
 		crossOrigin = crossOrigin || false;
 	});
-	run(() => {
+	$effect(() => {
 		classes = classes || '';
 	});
-	run(() => {
+	$effect(() => {
 		showCompressedResult = showCompressedResult || false;
 	});
 
