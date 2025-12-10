@@ -1,7 +1,9 @@
-<script lang="ts">
+<script module lang="ts">
+	// ===== IMPORTS =====
 	import ImageEncoder from './ImageEncoder.svelte';
 	import ImageLoader from './ImageLoader.svelte';
 
+	// ===== TYPES =====
 	interface Props {
 		/** A space-separated list of classes to apply to the canvas element. */
 		classes?: string;
@@ -22,7 +24,10 @@
 		/** Whether to show the compressed result. Defaults to false */
 		showCompressedResult?: boolean;
 	}
+</script>
 
+<script lang="ts">
+	// ===== PROPS =====
 	let {
 		classes = '',
 		crossOrigin = false,
@@ -35,17 +40,19 @@
 		showCompressedResult = false
 	}: Props = $props();
 
-	const clearImageURL = () => {
-		src = '';
-		url='';
-	};
-	
+	// ===== EFFECTS =====
 	$effect(() => {
 		width ??= 256;
 	});
 	$effect(() => {
 		height ??= 256;
 	});
+
+	// ===== FUNCTIONS =====
+	const clearImageURL = () => {
+		src = '';
+		url = '';
+	};
 </script>
 
 <div class="ImageInput" style='--image-input-width: {width}px; --image-input-height: {height}px'>
@@ -69,18 +76,25 @@
 
 <style>
 	.ImageInput {
+		/* Layout */
 		box-sizing: content-box;
-		width: var(--image-input-width);
-		height: var(--image-input-height);
 		display: grid;
 		align-items: center;
 		justify-items: center;
+		width: var(--image-input-width);
+		height: var(--image-input-height);
+		
+		/* Positioning */
 		position: relative;
 	}
+	
 	.ImageInput > button {
+		/* Positioning */
 		position: absolute;
 		top: 0.25em;
 		right: 0.25em;
+		
+		/* Misc/Overrides */
 		cursor: pointer;
 	}
 </style>

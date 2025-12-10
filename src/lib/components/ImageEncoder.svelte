@@ -1,18 +1,9 @@
-<script lang='ts'>
+<script module lang="ts">
+	// ===== IMPORTS =====
 	import type { Transform } from '../utils/pan-zoom.js';
-
 	import { panHandler } from '../utils/pan-zoom.js';
-	import { onMount } from 'svelte';
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	// ===== TYPES =====
 	interface Props {
 		/**  The source URL of the image to be displayed in the canvas. */
 		src: string;
@@ -33,7 +24,13 @@
 		/** Whether to show the compressed result. Defaults to false */
 		showCompressedResult: boolean;
 	}
+</script>
 
+<script lang="ts">
+	// ===== IMPORTS =====
+	import { onMount } from 'svelte';
+
+	// ===== PROPS =====
 	let {
 		src = $bindable(),
 		url = $bindable(),
@@ -46,40 +43,7 @@
 		showCompressedResult = $bindable()
 	}: Props = $props();
 
-	$effect(() => {
-		width ??= 256;
-	});
-	$effect(() => {
-		height ??= 256;
-	});
-	$effect(() => {
-		src = src || '';
-	});
-	$effect(() => {
-		url = url || '';
-	});
-	$effect(() => {
-		width = width || 256;
-	});
-	$effect(() => {
-		height = height || 256;
-	});
-	$effect(() => {
-		quality = quality || 0.5;
-	});
-	$effect(() => {
-		realTime = realTime || false;
-	});
-	$effect(() => {
-		crossOrigin = crossOrigin || false;
-	});
-	$effect(() => {
-		classes = classes || '';
-	});
-	$effect(() => {
-		showCompressedResult = showCompressedResult || false;
-	});
-
+	// ===== STATE =====
 	let canvas: HTMLCanvasElement = $state();
 	let img: HTMLImageElement | undefined = $state();
 	let ctx: CanvasRenderingContext2D | null;
@@ -90,6 +54,7 @@
 	let minScale = $state(1);
 	let dragging = $state(false);
 
+	// ===== INSTANCE CONSTANTS =====
 	// not a POJO because getters/setters are instrumentable by Svelte
 	// and `transform` is updated by imported functions
 	let transform: Transform = {
@@ -124,24 +89,40 @@
 		}
 	};
 
-	function redraw () {
-		if (!img || !ctx) return;
-		if (offsetX < 0) offsetX = 0;
-		if (offsetY < 0) offsetY = 0;
-		let limit = img.width * scale - width;
-		if (offsetX > limit) offsetX = limit;
-		limit = img.height * scale - height;
-		if (offsetY > limit) offsetY = limit;
-
-		ctx.resetTransform();
-		ctx.clearRect(0, 0, width, height);
-		ctx.translate(-offsetX, -offsetY);
-		ctx.scale(scale, scale);
-		ctx.drawImage(img, 0, 0);
-
-		if (realTime || !dragging) url = canvas.toDataURL('image/jpeg', quality);
-	}
-
+	// ===== EFFECTS =====
+	$effect(() => {
+		width ??= 256;
+	});
+	$effect(() => {
+		height ??= 256;
+	});
+	$effect(() => {
+		src = src || '';
+	});
+	$effect(() => {
+		url = url || '';
+	});
+	$effect(() => {
+		width = width || 256;
+	});
+	$effect(() => {
+		height = height || 256;
+	});
+	$effect(() => {
+		quality = quality || 0.5;
+	});
+	$effect(() => {
+		realTime = realTime || false;
+	});
+	$effect(() => {
+		crossOrigin = crossOrigin || false;
+	});
+	$effect(() => {
+		classes = classes || '';
+	});
+	$effect(() => {
+		showCompressedResult = showCompressedResult || false;
+	});
 	$effect(() => {
 		if (img) {
 			img.crossOrigin = crossOrigin ? 'anonymous' : null;
@@ -162,6 +143,7 @@
 		redraw();
 	});
 
+	// ===== LIFECYCLE =====
 	onMount(() => {
 		ctx = canvas.getContext('2d');
 		img = new Image();
@@ -171,14 +153,36 @@
 			scale = minScale = Math.max(width / img!.width, height / img!.height);
 		};
 	});
+
+	// ===== FUNCTIONS =====
+	function redraw () {
+		if (!img || !ctx) return;
+		if (offsetX < 0) offsetX = 0;
+		if (offsetY < 0) offsetY = 0;
+		let limit = img.width * scale - width;
+		if (offsetX > limit) offsetX = limit;
+		limit = img.height * scale - height;
+		if (offsetY > limit) offsetY = limit;
+
+		ctx.resetTransform();
+		ctx.clearRect(0, 0, width, height);
+		ctx.translate(-offsetX, -offsetY);
+		ctx.scale(scale, scale);
+		ctx.drawImage(img, 0, 0);
+
+		if (realTime || !dragging) url = canvas.toDataURL('image/jpeg', quality);
+	}
 </script>
 
 <canvas bind:this={canvas} {width} {height} class={classes} use:panHandler={transform}></canvas>
 
 <style>
 	canvas {
-		touch-action: none;
+		/* Positioning */
 		position: relative;
+		
+		/* Misc/Overrides */
+		touch-action: none;
 		cursor: move;
 	}
 </style>

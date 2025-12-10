@@ -1,13 +1,19 @@
-<script lang='ts'>
+<script module lang="ts">
+	// ===== TYPES =====
 	interface Props {
 		/** Callback function called when an image is loaded. Receives the data URL as a string. */
 		onImageLoaded?: (dataUrl: string) => void;
 	}
+</script>
 
+<script lang="ts">
+	// ===== PROPS =====
 	let { onImageLoaded }: Props = $props();
 
+	// ===== REFS =====
 	let fileInput: HTMLInputElement = $state();
 
+	// ===== FUNCTIONS =====
 	const preventDefault = (event: Event) => {
 		event.preventDefault();
 	};
@@ -94,23 +100,29 @@
 
 <style>
 	.drop-area {
+		/* Layout */
 		box-sizing: border-box;
-		display: inline-block;
-		border: 2px dashed #ccc;
-		background-color: #f9f9f9;
+		display: grid;
+		align-items: center;
+		align-content: center;
+		justify-content: center;
 		width: 100%;
 		height: 100%;
 		text-align: center;
 		vertical-align: center;
-		display: grid;
-		justify-content: center;
-		align-items: center;
-		align-content: center;
+		
+		/* Box/Visual */
+		border: 2px dashed #ccc;
+		background-color: #f9f9f9;
 	}
+	
 	button {
-		cursor: pointer;		
+		/* Misc/Overrides */
+		cursor: pointer;
 	}
+	
 	.hidden {
+		/* Layout */
 		display: none;
 	}
 </style>
