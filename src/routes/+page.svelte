@@ -19,6 +19,10 @@
 <div class="container">
 	<h1>Svelte Image Input and Manipulation Components</h1>
 
+	<p class="purpose">
+		Generate small, compressed images for direct database storage. Perfect for profile pictures, avatars, and thumbnails.
+	</p>
+
 	<h2>ImageInput Example</h2>
 
 	<p>
@@ -142,6 +146,14 @@
 
 	h1, h2, h3, p {
 		color: var(--text-color);
+	}
+
+	.purpose {
+		font-size: 1.1em;
+		text-align: center;
+		margin: 1rem 0 2rem;
+		color: #666;
+		font-style: italic;
 	}
 
 	h2, h3 {
