@@ -1,6 +1,6 @@
 {
     "name": "svelte-image-input",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Svelte components for loading, resizing, and compressing images into small data URLs for database storage",
     "keywords": [
         "svelte",
