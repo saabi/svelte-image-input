@@ -1,10 +1,12 @@
 # Svelte Image Components [demo](https://saabi.github.io/svelte-image-input/)
 
+**Generate small, compressed images that can be stored directly in database fields** instead of requiring separate file storage infrastructure. Perfect for profile pictures, avatars, thumbnails, and other small images that need to be stored alongside your data.
+
 This repository contains three Svelte components for working with images:
 
-1. `ImageInput`: A component that accepts images via drag and drop, clipboard paste, or by clicking a button to open a file dialog. It then allows you to resize and crop the image before creating a `data:` URL. It is a combination of the ImageLoader and ImageEncoder components described below.
+1. `ImageInput`: A component that accepts images via drag and drop, clipboard paste, or by clicking a button to open a file dialog. It then allows you to resize and crop the image before creating a compressed `data:` URL. It is a combination of the ImageLoader and ImageEncoder components described below.
 2. `ImageLoader`: A component that allows you to load images via drag and drop, clipboard paste, or by clicking a button to open a file dialog.
-3. `ImageEncoder`: A component for creating `data:` URLs from images in real time. You can also move and resize the image before encoding.
+3. `ImageEncoder`: A component for creating compressed `data:` URLs from images in real time. You can also move and resize the image before encoding.
 
 It supercedes the [svelte-image-encoder](https://github.com/saabi/svelte-image-encoder) component, which is now deprecated.
 
@@ -110,7 +112,16 @@ To use the component, add the `ImageLoader` component to your Svelte app and pro
 ## `ImageEncoder` Component
 >Pan, Zoom, and Compress Images in Svelte
 
-This Svelte component allows you to display an image in a canvas, apply pan and zoom actions to it, and create `data:` URLs from the images in real time. The generated data URL can be used for sending and receiving the image inside JSON AJAX requests and even storing images in database string columns, where an image URL would go, simplifying code logic. It provides a customizable user experience with various configuration options. The component also generates a data URL for the modified image, which can be used to show the compressed result. The original intended use is for a profile picture editor, allowing the user to resize and crop images, finally storing them in a small `data:` URL.
+This Svelte component allows you to display an image in a canvas, apply pan and zoom actions to it, and create compressed `data:` URLs from images in real time. The generated data URL is a small, base64-encoded JPEG string that can be stored directly in database string columns, eliminating the need for separate file storage systems or CDN infrastructure.
+
+**Key Benefits:**
+- **Simple storage**: Store images directly in your database alongside related data
+- **No file system required**: No need for S3, cloud storage, or file servers
+- **Easy serialization**: Data URLs work seamlessly with JSON APIs and can be sent/received in HTTP requests
+- **Small file sizes**: Configurable quality settings (default 0.5) produce compact images ideal for thumbnails and profile pictures
+- **Real-time preview**: See the compressed result as you pan and zoom
+
+The component provides a customizable user experience with various configuration options. The original intended use is for profile picture editors, allowing users to resize and crop images before storing them as small `data:` URLs in database fields.
 
 ### Usage
 
