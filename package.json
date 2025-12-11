@@ -1,8 +1,35 @@
 {
+    "name": "svelte-image-input",
+    "version": "1.0.0",
+    "description": "Svelte components for loading, resizing, and compressing images into small data URLs for database storage",
+    "keywords": [
+        "svelte",
+        "svelte5",
+        "image",
+        "image-processing",
+        "image-compression",
+        "data-url",
+        "base64",
+        "profile-picture",
+        "avatar",
+        "thumbnail",
+        "crop",
+        "resize",
+        "canvas"
+    ],
     "author": {
         "name": "Sebastian Ferreyra Pons",
         "email": "ushiferreyra@gmail.com",
         "url": "https://github.com/saabi"
+    },
+    "license": "ISC",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/saabi/svelte-image-input.git"
+    },
+    "homepage": "https://github.com/saabi/svelte-image-input#readme",
+    "bugs": {
+        "url": "https://github.com/saabi/svelte-image-input/issues"
     },
     "dependencies": {
         "detect-pointer-events": "^1.0.2"
@@ -42,10 +69,9 @@
         }
     },
     "files": [
-        "dist"
+        "dist",
+        "docs"
     ],
-    "license": "ISC",
-    "name": "svelte-image-input",
     "peerDependencies": {
         "svelte": "^5.0.0"
     },
@@ -66,5 +92,7 @@
     "svelte": "./dist/index.js",
     "type": "module",
     "types": "./dist/index.d.ts",
-    "version": "1.0.0"
+    "engines": {
+        "node": ">=18.0.0"
+    }
 }
